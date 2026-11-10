@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>みまもりの家 モデルハウスOPEN｜住宅見学会・ご予約｜株式会社つむぐホーム</title>
+<!-- 仮コピー -->
+<meta name="description" content="キッチンから、ぜんぶ見える。新潟市中央区美沢台2丁目のモデルハウス「みまもりの家」見学会。見学無料・お子様連れ歓迎。WEB予約でQUOカード500円分プレゼント。">
+<meta name="theme-color" content="#FAF7F0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;600;700&display=swap">
+<link rel="preload" as="image" type="image/webp"
+      imagesrcset="images/fv-bg-720.webp 720w, images/fv-bg-1440.webp 1440w"
+      imagesizes="(min-width: 1024px) 48vh, 100vw" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<div class="page">
+
+<!-- ============ 01 ヘッダー（ロゴ・見学予約ボタン・メニュー） ============ -->
+<header class="site-header" id="site-header">
+  <!-- ロゴ：差し替えは images/logo-full-green.* / logo-mark-green.*（2x書き出し）。幅が狭い画面（<380px）はマークのみ -->
+  <a class="site-header__logo" href="#top">
+    <picture>
+      <source media="(max-width:379px)" type="image/webp" srcset="images/logo-mark-green.webp">
+      <source media="(max-width:379px)" srcset="images/logo-mark-green.png">
+      <source type="image/webp" srcset="images/logo-full-green.webp">
+      <img class="site-header__logo-img" src="images/logo-full-green.png" width="659" height="72" alt="株式会社つむぐホーム">
+    </picture>
+  </a>
+  <a class="btn btn--primary site-header__cta" href="#reserve">見学予約</a>
+  <button class="site-header__menu" type="button" aria-expanded="false" aria-controls="global-nav">
+    <span class="site-header__bars" aria-hidden="true"></span><span class="visually-hidden">メニューを開く</span>
+  </button>
+  <nav class="global-nav" id="global-nav" aria-label="ページ内メニュー" hidden>
+    <ul>
+      <li><a href="#info">見学情報</a></li>
+      <li><a href="#charms">3つの魅力</a></li>
+      <li><a href="#photos">写真で見る見どころ</a></li>
+      <li><a href="#webtour">間取り・Web見学</a></li>
+      <li><a href="#spec">性能・仕様</a></li>
+      <li><a href="#merit">見学のメリット</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+      <li><a href="#access">アクセス</a></li>
+      <li><a href="#reserve" class="global-nav__reserve">見学を予約する</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- アイコン（インラインSVG・currentColor） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-washitsu" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="36" height="32" rx="2"/><path d="M24 8v32M6 24h36M15 8v32M33 8v32" opacity=".55"/></g></symbol>
+    <symbol id="i-laundry" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 14a4 4 0 1 1 4 4c-2.4.9-4 2-4 4.6V25"/><path d="M24 25 5 37h38z"/><path d="M9 43h30" opacity=".55"/></g></symbol>
+    <symbol id="i-split" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="38" height="28" rx="2"/><path d="M24 10v28" stroke-dasharray="3 4"/><path d="M12 24h6m-3-3 3 3-3 3M36 24h-6m3-3-3 3 3 3"/></g></symbol>
+    <symbol id="i-heat" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 30c-3-4 3-6 0-10s3-6 0-10M24 30c-3-4 3-6 0-10s3-6 0-10M34 30c-3-4 3-6 0-10s3-6 0-10"/><path d="M6 38h36" /><path d="M9 43h30" opacity=".55"/></g></symbol>
+    <symbol id="i-quake" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22 24 8l18 14"/><path d="M10 19v21h28V19"/><path d="M16 32l4-5 4 6 4-6 4 5"/></g></symbol>
+    <symbol id="i-wood" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="24" rx="17" ry="17"/><ellipse cx="24" cy="24" rx="11" ry="11" opacity=".7"/><ellipse cx="24" cy="24" rx="5" ry="5" opacity=".5"/><path d="M24 24 36 12" opacity=".55"/></g></symbol>
+    <symbol id="i-kitchen" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="20" width="38" height="18" rx="2"/><path d="M11 20v-5h10v5M29 16h8M26 28h12M10 28h8"/><path d="M5 42h38" opacity=".55"/></g></symbol>
+    <symbol id="i-snow" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v36M8.4 15l31.2 18M8.4 33l31.2-18"/><path d="m19 9 5 4 5-4M19 39l5-4 5 4" opacity=".7"/></g></symbol>
+    <symbol id="i-eye" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24s7-12 20-12 20 12 20 12-7 12-20 12S4 24 4 24z"/><circle cx="24" cy="24" r="5"/></g></symbol>
+    <symbol id="i-hand" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 26V12a3 3 0 0 1 6 0v10M22 22v-6a3 3 0 0 1 6 0v8M28 24v-4a3 3 0 0 1 6 0v10c0 7-5 12-11 12h-2c-5 0-8-3-11-8l-4-7a3 3 0 0 1 5-3l3 4"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10h36v22H20l-9 8v-8H6z"/><path d="M14 18h20M14 24h12" opacity=".7"/></g></symbol>
+    <symbol id="i-doc" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5h17l8 8v30H12z"/><path d="M29 5v8h8M17 22h14M17 29h14M17 36h8" opacity=".75"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="fv" id="top">
+  <!-- FV：文字なし背景（images/fv-bg-*）＋HTML文字。デザイン原画（Photoshop）は firstview.jpg（1440×2999）。
+       ▼ 切り替え：文字入り1枚モードにするには、styles.css の「FV表示モード」の2行を入れ替える（既定＝HTML文字版） -->
+  <div class="fv__stage">
+    <picture>
+      <source type="image/webp" srcset="images/fv-bg-720.webp 720w, images/fv-bg-1440.webp 1440w" sizes="(min-width: 1024px) 48vh, 100vw">
+      <img class="fv__img" src="images/fv-bg-720.jpg" srcset="images/fv-bg-720.jpg 720w, images/fv-bg-1440.jpg 1440w" sizes="(min-width: 1024px) 48vh, 100vw"
+           width="720" height="1500" fetchpriority="high" decoding="async" alt="">
+    </picture>
+    <!-- 文字入り1枚モード用（既定では非表示・読み込みもしない） -->
+    <picture class="fv__comp">
+      <source type="image/webp" srcset="images/fv-comp-720.webp 720w, images/fv-comp-1440.webp 1440w" sizes="(min-width: 1024px) 48vh, 100vw">
+      <img src="images/fv-comp-720.jpg" srcset="images/fv-comp-720.jpg 720w, images/fv-comp-1440.jpg 1440w" sizes="(min-width: 1024px) 48vh, 100vw"
+           width="720" height="1500" loading="lazy" decoding="async"
+           alt="白い壁と黒い屋根のモデルハウス「みまもりの家」の前を歩く親子3人。「キッチンから、ぜんぶ見える家。」みまもりの家 モデルハウスOPEN。12月12日(土)・13日(日)・19日(土)・20日(日) 完成見学会開催。">
+    </picture>
+    <!-- 下部の文字（ステージ基準＝画像と同じ位置に載る） -->
+    <div class="fv__text fv__bottom">
+      <h1 class="fv__name">みまもりの家<span class="fv__open">モデルハウスOPEN</span></h1>
+      <!-- 仮：日付確定後に差し替え（FV・03の表・フォーム js/main.js の EVENT_DATES を合わせる） -->
+      <div class="fv__date">
+        <p class="fv__date-d"><span><sup>12/</sup>12<small>(土)</small></span> <span>13<small>(日)</small></span> <span>19<small>(土)</small></span> <span>20<small>(日)</small></span></p>
+        <p class="fv__date-t">完成見学会開催</p>
+      </div>
+    </div>
+  </div>
+  <!-- 縦書き（コンテナ基準：短い画面では画像が上にずれるため、上端を確保して家族に重ねない） -->
+  <p class="fv__text fv__tate"><span>キッチンから、</span><span>ぜんぶ見える家。</span></p>
+</div>
+
+<main id="main" class="main">
+
+<!-- ============ 03 見学情報（開催日時・場所・アクセスの簡易情報） ============ -->
+<section class="info" id="info" aria-labelledby="info-title">
+  <div class="inner">
+    <p class="eyebrow">MODEL HOUSE OPEN</p>
+    <!-- 仮コピー（見出し・特徴の一行・リード） -->
+    <h2 class="h-serif" id="info-title">みまもりの家、<br>モデルハウスOPEN。</h2>
+    <p class="info__feature">「キッチンから、ぜんぶ見える家」</p>
+    <p class="section-lead">新潟市中央区美沢台に、つむぐホームのモデルハウス「みまもりの家」がOPEN。</p>
+    <!-- 仮コピー（FVから移した小さなキャッチ） -->
+    <p class="info__catch">暮らしを、見に行こう。</p>
+    <p class="cta-row"><a class="btn btn--primary" href="#reserve" data-main-cta>見学を予約する</a></p>
+
+    <div class="info-band"><span>INFORMATION</span></div>
+    <table class="info-table">
+      <caption class="visually-hidden">モデルハウス見学会の開催情報</caption>
+      <tbody>
+        <tr><th scope="row">所在地</th><td>新潟市中央区美沢台2丁目（K様邸）</td></tr>
+        <!-- ▼▼ 開催日（仮）：確定後に差し替えてください。FVの帯・丸バッジ、フォームの日付（js/main.js の EVENT_DATES）も合わせて変更 ▼▼ -->
+        <tr><th scope="row">開催日</th><td>2026年12月12日(土)・13日(日)<br>19日(土)・20日(日)<span class="tentative">仮</span></td></tr>
+        <!-- ▲▲ 開催日（仮）ここまで ▲▲ -->
+        <tr><th scope="row">時間</th><td>10:00〜17:00<small>（最終受付16:30）</small><span class="info-slots" data-time-slots>ご案内開始：10:00〜／11:00〜／12:00〜／13:00〜／14:00〜／15:00〜／16:00〜／16:30〜</span></td></tr>
+        <tr><th scope="row">アクセス</th><td>JR美沢台駅から徒歩12分／駐車場2台<a href="#access">詳しい道順</a></td></tr>
+        <tr><th scope="row">備考</th><td>ご予約優先（ご予約なしでもご参加いただけます）。見学無料・お子様連れ歓迎。室内の撮影はご遠慮ください。</td></tr>
+      </tbody>
+    </table>
+    <p class="note">※ご案内開始時間は仮です。確定後に差し替えます。</p>
+    <div class="perk" role="group" aria-label="ご予約来場特典">
+      <div class="perk__badge"><small>ご予約来場特典</small><b>QUOカード</b><strong>500円分</strong><em>プレゼント！</em></div>
+      <p class="perk__text">WEBまたはお電話でご予約ください<small>（前日まで受付）</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 この家で体感できる3つの魅力 ============ -->
+<section class="charms" id="charms" aria-labelledby="charms-title">
+  <div class="inner">
+    <p class="eyebrow">POINT</p>
+    <h2 class="h-serif" id="charms-title">この家で体感できる、<br>3つの魅力</h2>
+    <!-- 仮コピー（見出し・リード文） -->
+    <p class="section-lead">図面だけでは伝わらない3つを、現地でご案内します。</p>
+    <ol class="charm-list">
+      <li class="charm">
+        <span class="charm__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-washitsu"/></svg></span>
+        <h3 class="charm__title">リビング続きの和室</h3>
+        <p>おもちゃを広げても、そのままお昼寝しても。引き戸を閉めれば客間にもなる、家族のもうひとつの居場所です。</p>
+        <p class="charm__meta">場所：1F・LDK南側　用途：遊び場、お昼寝、客間</p>
+      </li>
+      <li class="charm">
+        <span class="charm__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-laundry"/></svg></span>
+        <h3 class="charm__title">洗う・干す・しまうが、ひとつづき</h3>
+        <p>雪の日も梅雨の日も頼れる室内干しスペースと、キッチンから続く回遊の家事動線。</p>
+        <p class="charm__meta">場所：1F・水まわり　ポイント：雪国の冬でも、部屋干しがよく乾く</p>
+      </li>
+      <li class="charm">
+        <span class="charm__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-split"/></svg></span>
+        <h3 class="charm__title">可変12帖の子供部屋</h3>
+        <p>造作カウンターと可動間仕切りで、家族の成長に合わせて姿を変える一室。仕切りを動かす体験は、ぜひ現地で。</p>
+        <p class="charm__meta">場所：2F南側　現在：ふたりのワークルーム／将来：2つの個室に</p>
+      </li>
+    </ol>
+    <figure class="worldview">
+      <picture>
+        <source type="image/webp" srcset="images/watercolor-480.webp 480w, images/watercolor-960.webp 960w" sizes="(min-width: 1024px) 240px, 40vw">
+        <img src="images/watercolor-480.jpg" srcset="images/watercolor-480.jpg 480w, images/watercolor-960.jpg 960w" sizes="(min-width: 1024px) 240px, 40vw"
+             width="480" height="634" loading="lazy" decoding="async" alt="ウッドデッキと芝生の庭から見たみまもりの家の水彩イラスト。">
+      </picture>
+      <figcaption>
+        <span class="worldview__quote">「キッチンからデッキの子どもにも声が届くのが、この家の決め手でした」</span>
+        <span class="worldview__who">（30代ご夫婦＋お子様1人）</span>
+        <small>※外観パースはイメージです</small>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 05 写真で見る見どころ（LDK・キッチン・和室・洗面・2F を縦並び） ============ -->
+<section class="photos" id="photos" aria-labelledby="photos-title">
+  <div class="inner photos__head">
+    <p class="eyebrow">PHOTO</p>
+    <h2 class="h-serif" id="photos-title">写真で見る見どころ</h2>
+  </div>
+
+  <!-- 先頭：LDKリード -->
+  <article class="shot shot--lead" aria-labelledby="lead-title">
+    <figure class="photo photo--ldk">
+      <picture>
+        <source type="image/webp" srcset="images/interior-ldk-720.webp 720w, images/interior-ldk-1200.webp 1200w" sizes="(min-width: 1024px) 720px, 100vw">
+        <img src="images/interior-ldk-720.jpg" srcset="images/interior-ldk-720.jpg 720w, images/interior-ldk-1200.jpg 1200w" sizes="(min-width: 1024px) 720px, 100vw" width="1200" height="947" loading="lazy" decoding="async"  alt="LDK18帖。左手前にペニンシュラキッチン、正面に庭へ続く大きな窓、右手に障子を開けた和室とベビーマット。">
+      </picture>
+      <figcaption>1F・LDK18帖（床暖房＋天然木）</figcaption>
+    </figure>
+    <div class="inner">
+      <h3 class="h-serif h-serif--lead" id="lead-title">キッチンから、<br>ぜんぶ見える。</h3>
+      <p>家事の中心にいる時間がいちばん長いのは、キッチンかもしれません。みまもりの家は、南北にのびるペニンシュラキッチンを暮らしの真ん中に置き、リビングも、和室も、デッキで遊ぶ子どもの姿も、火を止めずに見渡せるように設計しました。</p>
+      <ul class="tags">
+        <li>場所：1F中央（南北ペニンシュラ）</li>
+        <li>視線の先：LDK・和室・ウッドデッキ</li>
+      </ul>
+    </div>
+  </article>
+
+  <div class="inner shot-list">
+    <!-- キッチン：LDK写真の左側をトリミング（同一写真の別の見せ方） -->
+    <article class="shot shot--card">
+      <figure class="photo photo--crop photo--crop-l">
+        <picture>
+        <source type="image/webp" srcset="images/interior-ldk-720.webp 720w, images/interior-ldk-1200.webp 1200w" sizes="(min-width: 1024px) 640px, 100vw">
+        <img src="images/interior-ldk-720.jpg" srcset="images/interior-ldk-720.jpg 720w, images/interior-ldk-1200.jpg 1200w" sizes="(min-width: 1024px) 640px, 100vw" width="1200" height="947" loading="lazy" decoding="async"  alt="ペニンシュラキッチンのカウンターと、奥に続くLDK。">
+      </picture>
+      </figure>
+      <div class="shot__body">
+        <h3 class="shot__title">キッチン</h3>
+        <p>調理の手を止めずに家族と目が合う回遊動線。実際の見え方は、キッチンに立ってお確かめください。</p>
+      </div>
+    </article>
+    <!-- 和室：LDK写真の右側をトリミング -->
+    <article class="shot shot--card">
+      <figure class="photo photo--crop photo--crop-r">
+        <picture>
+        <source type="image/webp" srcset="images/interior-ldk-720.webp 720w, images/interior-ldk-1200.webp 1200w" sizes="(min-width: 1024px) 640px, 100vw">
+        <img src="images/interior-ldk-720.jpg" srcset="images/interior-ldk-720.jpg 720w, images/interior-ldk-1200.jpg 1200w" sizes="(min-width: 1024px) 640px, 100vw" width="1200" height="947" loading="lazy" decoding="async"  alt="リビングと、障子を開けた先の和室。手前にベビーマット。">
+      </picture>
+      </figure>
+      <div class="shot__body">
+        <h3 class="shot__title">リビング続きの和室</h3>
+        <p>引き戸を開ければリビングとひとつながり。遊び場にも、お昼寝にも、客間にも。</p>
+      </div>
+    </article>
+    <!-- 洗面・室内干し：写真未支給のためプレースホルダー -->
+    <article class="shot shot--card">
+      <div class="photo photo--ph" role="img" aria-label="洗面・室内干しスペースの写真は準備中です">
+        <span><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-laundry"/></svg><b>洗面・室内干しスペース</b><small>写真は準備中（現地でご覧ください）</small></span>
+      </div>
+      <div class="shot__body">
+        <h3 class="shot__title">洗面・室内干しスペース</h3>
+        <p>雪の日も梅雨の日も頼れる室内干しスペースと、キッチンから続く回遊の家事動線。</p>
+      </div>
+    </article>
+    <!-- 2F 子供部屋 -->
+    <article class="shot shot--card">
+      <figure class="photo photo--2f">
+        <picture>
+        <source type="image/webp" srcset="images/interior-2f-720.webp 720w, images/interior-2f-1220.webp 1220w" sizes="(min-width: 1024px) 640px, 100vw">
+        <img src="images/interior-2f-720.jpg" srcset="images/interior-2f-720.jpg 720w, images/interior-2f-1220.jpg 1220w" sizes="(min-width: 1024px) 640px, 100vw" width="1220" height="768" loading="lazy" decoding="async"  alt="2Fの子供部屋12帖。明るい無垢調の床が奥まで続き、右手にバルコニーへ出る大きな窓、左手に木の扉とクローゼット。">
+      </picture>
+        <figcaption>2F・子供部屋12帖（将来6帖×2に分割）</figcaption>
+      </figure>
+      <div class="shot__body">
+        <!-- 仮コピー（見出しはチラシ本文の言い換え） -->
+        <h3 class="shot__title">家族のかたちに合わせて、姿を変える12帖</h3>
+        <p>2階には、家族のかたちに合わせて姿を変える12帖の子供部屋。ふたりのワークルームから始まり、やがて2つの個室へ。当日は設計担当が、間取りに込めた意図をご案内します。</p>
+      </div>
+    </article>
+    <p class="cta-row"><a class="btn btn--primary" href="#reserve">見学を予約する</a></p>
+  </div>
+</section>
+
+<section class="plan" id="webtour" aria-labelledby="plan-title">
+  <!-- 06冒頭：外観6秒ムービー（Web見学の直前） -->
+  <div class="movie" role="group" aria-label="外観ムービー">
+    <div class="movie__frame">
+      <!-- prefers-reduced-motion の場合は JS が autoplay を止め、ポスター表示のままにします -->
+      <video class="movie__video" muted loop playsinline preload="none" autoplay
+             poster="video/exterior-poster.jpg" width="960" height="522"
+             aria-label="みまもりの家の外観。芝生と踏み石から玄関へゆっくり近づく映像（音声なし）">
+        <source src="video/exterior-6s.mp4" type="video/mp4">
+      </video>
+      <button class="movie__toggle" type="button" aria-pressed="false" hidden>一時停止</button>
+    </div>
+    <!-- 仮コピー -->
+    <p class="movie__caption h-serif">さあ、玄関から中へ。</p>
+  </div>
+  <div class="inner plan__inner">
+    <p class="eyebrow">WEB見学</p>
+    <!-- 仮コピー -->
+    <h2 class="h-serif" id="plan-title">間取りを歩いてみる</h2>
+    <!-- 仮コピー -->
+    <p class="section-lead">気になるお部屋をタップすると、詳しくご覧いただけます。</p>
+
+    <!--
+      間取りビューア（差し替え可能モジュール）
+      data-viewer="3d" … 初期表示のビューア。"2d" にすると平面図が初期表示になります。
+      - 3D模型：js/viewer3d.js（three.js r170 を js/vendor/ に同梱、セクション接近時に遅延読み込み）
+      - 平面図：js/main.js の FloorViewers["2d"]（インラインSVG）
+      どちらも同じインターフェース { mount(container, data, {onSelect}), setFloor(id), select(roomId), destroy() } を持ち、
+      部屋データは js/main.js の PLAN_DATA に集約。WebGL が使えない環境では平面図のみ表示します。
+    -->
+    <div class="viewer" data-viewer="3d" id="floor-viewer">
+      <div class="viewer__bar">
+        <div class="viewer__mode" role="group" aria-label="表示の切り替え">
+          <button type="button" data-mode="3d" aria-pressed="true">3D模型</button>
+          <button type="button" data-mode="2d" aria-pressed="false">平面図</button>
+        </div>
+        <button type="button" class="viewer__reset" data-action="reset">回転リセット</button>
+      </div>
+      <div class="viewer__tabs" role="tablist" aria-label="階の切り替え">
+        <button type="button" role="tab" id="tab-1f" aria-controls="panel-floor" aria-selected="true" data-floor="1f">1F</button>
+        <button type="button" role="tab" id="tab-2f" aria-controls="panel-floor" aria-selected="false" data-floor="2f" tabindex="-1">2F</button>
+      </div>
+      <div class="viewer__panel" id="panel-floor" role="tabpanel" aria-labelledby="tab-1f">
+        <div class="viewer__stage viewer__stage--3d" data-stage="3d">
+          <p class="viewer3d__loading">3D模型を読み込み中…</p>
+          <!-- 仮コピー -->
+          <p class="viewer3d__hint" aria-hidden="true">横スワイプで回転・2本指で拡大</p>
+        </div>
+        <div class="viewer__stage viewer__stage--2d" data-stage="2d" hidden>
+          <noscript><p>間取り図の表示にはJavaScriptを有効にしてください。</p></noscript>
+        </div>
+        <div class="room-list" role="group" aria-label="お部屋を選ぶ"></div>
+      </div>
+      <p class="viewer__note">※間取りは概略図・イメージ模型です。詳細は現地でご覧ください。</p>
+      <div class="room-detail" id="room-detail" aria-live="polite" tabindex="-1"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 性能・仕様（断熱・耐震・素材・設備） ============ -->
+<!-- 資料（チラシ）由来の記載のみ確定表示。数値・等級など資料に無いものは「※数値は確定後に記載」＋「仮」タグ。 -->
+<section class="spec" id="spec" aria-labelledby="spec-title">
+  <div class="inner">
+    <p class="eyebrow">SPEC</p>
+    <h2 class="h-serif" id="spec-title">性能・仕様</h2>
+    <!-- 仮コピー（リード文） -->
+    <p class="section-lead">雪国の暮らしを見つめてきた設計。断熱・耐震・素材・設備のポイントをまとめました。</p>
+
+    <!-- 資料（チラシ）にあるキーワードを大きく。数値は載せない -->
+    <ul class="kw">
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-snow"/></svg><b>雪国仕様</b><small>木造2階建</small></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heat"/></svg><b>床暖房</b><small>LDK 18帖</small></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wood"/></svg><b>天然木の床</b><small>LDKの床</small></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-split"/></svg><b>可変12帖</b><small>6帖＋6帖に分けられる</small></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-kitchen"/></svg><b>ペニンシュラ</b><small>キッチン（南北にのびる）</small></li>
+      <li><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-quake"/></svg><b>耐雪カーポート</b><small>2台分・風除室つき</small></li>
+    </ul>
+
+    <h3 class="sub-title">住まいについて</h3>
+    <dl class="spec-list">
+      <div><dt>構造</dt><dd>木造2階建（雪国仕様）</dd></div>
+      <div><dt>延床面積</dt><dd>約38坪（125.86㎡）</dd></div>
+      <div><dt>間取り</dt><dd>3LDK＋和室<small>（可変12帖の子供部屋を含む）</small></dd></div>
+      <div><dt>駐車</dt><dd>耐雪カーポート2台</dd></div>
+    </dl>
+
+    <div class="snow">
+      <span class="snow__icon"><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-snow"/></svg></span>
+      <div>
+        <h3 class="snow__title">雪国と暮らす工夫</h3>
+        <p>落雪に配慮した屋根形状、風除室、耐雪カーポート。数値や仕様の詳細は、会場で係員がご説明します。</p>
+        <p class="charm__meta">場所：屋根・玄関・窓まわり</p>
+      </div>
+    </div>
+
+    <div class="spec-cards">
+      <article class="spec-card">
+        <header><span class="spec-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-heat"/></svg></span><h3>断熱・あたたかさ</h3></header>
+        <ul class="sp">
+          <li><span class="sp__k">仕様</span><span class="sp__v">木造2階建（雪国仕様）</span></li>
+          <li><span class="sp__k">LDK</span><span class="sp__v">18帖・床暖房＋天然木の床</span></li>
+          <li class="is-tbd"><span class="sp__k">断熱等級</span><span class="sp__v">※数値は確定後に記載<span class="tentative">仮</span></span></li>
+          <li class="is-tbd"><span class="sp__k">UA値</span><span class="sp__v">※数値は確定後に記載<span class="tentative">仮</span></span></li>
+          <li class="is-tbd"><span class="sp__k">C値（気密）</span><span class="sp__v">※数値は確定後に記載<span class="tentative">仮</span></span></li>
+        </ul>
+      </article>
+      <article class="spec-card">
+        <header><span class="spec-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-quake"/></svg></span><h3>耐震・構造</h3></header>
+        <ul class="sp">
+          <li><span class="sp__k">構造</span><span class="sp__v">木造2階建</span></li>
+          <li><span class="sp__k">雪への備え</span><span class="sp__v">落雪に配慮した屋根形状・耐雪カーポート</span></li>
+          <li class="is-tbd"><span class="sp__k">耐震等級</span><span class="sp__v">※数値は確定後に記載<span class="tentative">仮</span></span></li>
+          <li class="is-tbd"><span class="sp__k">工法・基礎</span><span class="sp__v">※確定後に記載<span class="tentative">仮</span></span></li>
+        </ul>
+      </article>
+      <article class="spec-card">
+        <header><span class="spec-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-wood"/></svg></span><h3>素材</h3></header>
+        <ul class="sp">
+          <li><span class="sp__k">LDK床</span><span class="sp__v">天然木（床暖房対応）</span></li>
+          <li><span class="sp__k">子供部屋</span><span class="sp__v">造作カウンター・可動間仕切り</span></li>
+          <li class="is-tbd"><span class="sp__k">外壁・屋根・サッシ</span><span class="sp__v">※仕様は確定後に記載<span class="tentative">仮</span></span></li>
+        </ul>
+      </article>
+      <article class="spec-card">
+        <header><span class="spec-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-kitchen"/></svg></span><h3>設備</h3></header>
+        <ul class="sp">
+          <li><span class="sp__k">キッチン</span><span class="sp__v">ペニンシュラキッチン（南北）</span></li>
+          <li><span class="sp__k">給湯</span><span class="sp__v">エコキュート</span></li>
+          <li><span class="sp__k">暖房</span><span class="sp__v">LDK 床暖房</span></li>
+          <li><span class="sp__k">収納・家事</span><span class="sp__v">WIC・SC（靴収納）・背面収納・室内干しスペース</span></li>
+          <li><span class="sp__k">玄関まわり</span><span class="sp__v">風除室・耐雪カーポート2台</span></li>
+          <li class="is-tbd"><span class="sp__k">メーカー・グレード</span><span class="sp__v">※確定後に記載<span class="tentative">仮</span></span></li>
+        </ul>
+      </article>
+    </div>
+    <p class="note">※「仮」の項目は資料での確定待ちです。数値・仕様は確定後に記載します。<br>※詳しい仕様書・図面集は会場でお配りしています。</p>
+    <p class="cta-row"><a class="btn btn--primary" href="#reserve">見学を予約する</a></p>
+  </div>
+</section>
+
+<!-- ============ 08 見学のメリット（実際に見ることで分かること／特典） ============ -->
+<section class="benefit" id="merit" aria-labelledby="merit-title">
+  <div class="inner">
+    <p class="eyebrow eyebrow--light">MERIT</p>
+    <h2 class="h-serif" id="merit-title">見学のメリット</h2>
+    <!-- 仮コピー（見出し・各カードの見出し。説明文はチラシ記載の事実） -->
+    <p class="section-lead section-lead--light">実際に見ることで分かることがあります。</p>
+    <ul class="merit-list">
+      <li><span class="merit__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-eye"/></svg></span><div><h3>キッチンに立って、視線の抜けを確かめる</h3><p>実際の見え方は、キッチンに立ってお確かめください。</p></div></li>
+      <li><span class="merit__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-hand"/></svg></span><div><h3>仕切りを動かす体験ができる</h3><p>可変12帖の子供部屋の仕切りを動かす体験は、現地で（間仕切りは当日動かせます）。</p></div></li>
+      <li><span class="merit__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-chat"/></svg></span><div><h3>設計担当に、意図を聞ける</h3><p>当日は設計担当が、間取りに込めた意図をご案内します。数値や仕様の詳細は係員がご説明します。</p></div></li>
+      <li><span class="merit__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-doc"/></svg></span><div><h3>仕様書・図面集がもらえる</h3><p>詳しい仕様書・図面集は会場でお配りしています。</p></div></li>
+    </ul>
+
+    <h3 class="sub-title sub-title--light">参加について</h3>
+    <ul class="benefit-list">
+      <li><strong>見学無料・お子様連れ歓迎</strong><span>ご予約なしでもご参加いただけます。お買い物のついでなど、お気軽にお立ち寄りください。</span></li>
+      <li><strong>ご予約優先</strong><span>WEBまたはお電話でご予約ください（前日まで受付）。ご見学は30分ほどから、現地スタッフがご案内します。</span></li>
+            <li><strong>駐車場2台</strong><span>バリアフリー優先駐車場あり。満車の際は係員の誘導に従ってください。</span></li>
+    </ul>
+    <div class="perk" role="group" aria-label="ご予約来場特典">
+      <div class="perk__badge"><small>ご予約来場特典</small><b>QUOカード</b><strong>500円分</strong><em>プレゼント！</em></div>
+      <p class="perk__text">WEBまたはお電話でご予約ください<small>（前日まで受付）</small></p>
+    </div>
+    <p class="note note--light">※お施主様のご厚意による公開のため、室内の撮影はご遠慮ください。<br>※混雑時はお待ちいただく場合があります。</p>
+    <div class="also">
+      <p class="also__label">同時開催</p>
+      <p><strong>スマートホーム説明会</strong><br>スマートフォン等から遠隔操作や自動化によって、暮らしの利便性や快適性を高める仕組みをご紹介。</p>
+    </div>
+    <a class="btn btn--primary" href="#reserve">見学を予約する</a>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="inner">
+    <p class="eyebrow">FAQ</p>
+    <h2 class="h-serif" id="faq-title">よくあるご質問</h2>
+    <!-- 仮コピー（質問文は新規作成。回答はチラシ記載の事実のみ） -->
+    <div class="faq-list">
+      <details><summary>予約なしでも見学できますか？</summary><p>はい、ご予約なしでもご参加いただけます。ご予約の方を優先してご案内しますので、WEBまたはお電話でのご予約がおすすめです（前日まで受付）。</p></details>
+      <details><summary>子ども連れでも大丈夫ですか？</summary><p>お子様連れ歓迎です。見学は無料です。</p></details>
+      <details><summary>見学にはどのくらい時間がかかりますか？</summary><p>ご見学は30分ほどから、現地スタッフがご案内します。</p></details>
+      <details><summary>駐車場はありますか？</summary><p>駐車場は2台分です（バリアフリー優先駐車場あり）。満車の際は係員の誘導に従ってください。</p></details>
+      <details><summary>室内の写真を撮ってもいいですか？</summary><p>お施主様のご厚意による公開のため、室内の撮影はご遠慮ください。仕様書・図面集は会場でお配りしています。</p></details>
+      <details><summary>QUOカードはどうすればもらえますか？</summary><p>ご予約のうえご来場いただいた方に、QUOカード500円分をプレゼントします。</p></details>
+    </div>
+  </div>
+</section>
+<section class="access" id="access" aria-labelledby="access-title">
+  <div class="inner">
+    <p class="eyebrow">ACCESS</p>
+    <h2 class="h-serif" id="access-title">交通のご案内</h2>
+    <p class="access__place">会場：新潟市中央区美沢台2丁目 K様邸</p>
+    <!-- 地図プレースホルダー：本番では Google マップ等の埋め込み、または地図画像に差し替えてください -->
+    <div class="map-placeholder" role="img" aria-label="地図（準備中）。美沢台駅から駅前通りを南へ、国道8号を越えて中央公園の南側が会場です。">
+      <span>MAP（準備中）</span>
+      <small>美沢台駅 → 駅前通り → 国道8号 → 中央公園の南が会場</small>
+    </div>
+    <dl class="route">
+      <div><dt>お車</dt><dd>新潟中央ICから国道8号経由 約20分。駐車場2台（満車時は係員誘導）</dd></div>
+      <div><dt>バス</dt><dd>JR新潟駅南口バス停C61から「美沢台入口」で下車、徒歩3分。</dd></div>
+      <div><dt>JR</dt><dd>JR美沢台駅から徒歩12分。</dd></div>
+    </dl>
+    <p class="note">※現地には旗を立ててご案内しています。ご不明な場合はお気軽にお電話ください。</p>
+    <h3 class="sub-title">美沢台の暮らし</h3>
+    <ul class="town">
+      <li><span><strong>美沢台中央公園</strong>遊具と芝生の広場</span><em>徒歩3分</em></li>
+      <li><span><strong>美沢台小学校</strong>歩道つきの通学路</span><em>徒歩6分</em></li>
+      <li><span><strong>スーパー・ドラッグストア</strong>夜10時まで営業</span><em>徒歩7分</em></li>
+      <li><span><strong>市立図書館 美沢台分館</strong>読み聞かせ会も開催</span><em>徒歩8分</em></li>
+      <li><span><strong>美沢台メディカルゾーン</strong>内科・小児科・調剤</span><em>徒歩10分</em></li>
+    </ul>
+  </div>
+</section>
+<section class="reserve" id="reserve" aria-labelledby="reserve-title">
+  <div class="inner">
+    <p class="eyebrow">RESERVATION</p>
+    <h2 class="h-serif" id="reserve-title">見学のご予約</h2>
+    <div class="perk" role="group" aria-label="ご予約来場特典">
+      <div class="perk__badge"><small>ご予約来場特典</small><b>QUOカード</b><strong>500円分</strong><em>プレゼント！</em></div>
+      <p class="perk__text">WEBまたはお電話でご予約ください<small>（前日まで受付）</small></p>
+    </div>
+    <p class="section-lead">前日までご予約を受け付けています。ご予約なしでもご参加いただけます。</p>
+    <p class="tel-line">お電話でのご予約：<a href="tel:0252113233">TEL 025-211-3233</a><small>（受付 10:00〜17:00）</small></p>
+
+    <!-- action="#" はダミー。送信先は js/main.js の FORM_ENDPOINT を差し替えてください -->
+    <form class="form" id="reserve-form" action="#" method="post" novalidate>
+      <div class="form__step" data-step="input">
+        <p class="form__required-note"><span class="req">必須</span>は入力必須項目です。</p>
+        <div class="form__errors" id="form-errors" role="alert" tabindex="-1" hidden></div>
+
+        <fieldset class="field">
+          <legend>見学方法<span class="req">必須</span></legend>
+          <div class="choice">
+            <label><input type="radio" name="style" value="来場見学" checked> 会場で見学（来場）</label>
+            <label><input type="radio" name="style" value="Web見学"> オンラインで見学（Web見学）<!-- 仮コピー --></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="f-date">希望日<span class="req">必須</span></label>
+          <select id="f-date" name="date" required aria-describedby="err-date"><option value="">選択してください</option></select>
+          <p class="field__error" id="err-date"></p>
+        </div>
+        <div class="field">
+          <label for="f-time">希望時間<span class="req">必須</span></label>
+          <select id="f-time" name="time" required aria-describedby="err-time"><option value="">選択してください</option></select>
+          <p class="field__error" id="err-time"></p>
+        </div>
+        <div class="field field--row">
+          <div>
+            <label for="f-adults">大人<span class="req">必須</span></label>
+            <select id="f-adults" name="adults" required aria-describedby="err-adults">
+              <option value="1">1名</option><option value="2" selected>2名</option><option value="3">3名</option><option value="4">4名</option><option value="5">5名以上</option>
+            </select>
+            <p class="field__error" id="err-adults"></p>
+          </div>
+          <div>
+            <label for="f-children">お子様</label>
+            <select id="f-children" name="children">
+              <option value="0" selected>0名</option><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名以上</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-name">お名前<span class="req">必須</span></label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="例）美沢 花子" aria-describedby="err-name">
+          <p class="field__error" id="err-name"></p>
+        </div>
+        <div class="field">
+          <label for="f-kana">フリガナ<span class="req">必須</span></label>
+          <input id="f-kana" name="kana" type="text" required placeholder="例）ミサワ ハナコ" aria-describedby="err-kana">
+          <p class="field__error" id="err-kana"></p>
+        </div>
+        <div class="field">
+          <label for="f-tel">電話番号<span class="req">必須</span></label>
+          <input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required placeholder="例）090-1234-5678" aria-describedby="err-tel">
+          <p class="field__error" id="err-tel"></p>
+        </div>
+        <div class="field">
+          <label for="f-email">メールアドレス<span class="req">必須</span></label>
+          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="例）hanako@example.jp" aria-describedby="err-email">
+          <p class="field__error" id="err-email"></p>
+        </div>
+        <div class="field">
+          <label for="f-message">ご質問・見たいお部屋など<span class="opt">任意</span></label>
+          <textarea id="f-message" name="message" rows="4" placeholder="例）キッチンからの見え方を確かめたい"></textarea>
+        </div>
+        <div class="field field--consent">
+          <label class="consent"><input id="f-privacy" type="checkbox" name="privacy" value="同意する" required aria-describedby="err-privacy"> <span><a href="#privacy-policy" class="privacy-link">個人情報の取り扱い</a>に同意する<span class="req">必須</span></span></label>
+          <p class="field__error" id="err-privacy"></p>
+          <!-- 仮コピー：正式なプライバシーポリシーに差し替えてください -->
+          <p class="privacy-text" id="privacy">ご入力いただいた個人情報は、見学会のご案内・ご連絡のみに利用し、法令に基づく場合を除き第三者に提供しません。</p>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">入力内容を確認する</button>
+      </div>
+
+      <div class="form__step" data-step="confirm" hidden>
+        <h3 class="form__step-title" tabindex="-1">入力内容のご確認</h3>
+        <dl class="confirm-list" id="confirm-list"></dl>
+        <div class="form__actions">
+          <button type="button" class="btn btn--ghost" data-action="back">修正する</button>
+          <button type="button" class="btn btn--primary" data-action="send">この内容で予約する</button>
+        </div>
+      </div>
+
+      <div class="form__step form__done" data-step="done" hidden>
+        <h3 class="form__step-title" tabindex="-1">ご予約ありがとうございます。</h3>
+        <!-- 仮コピー -->
+        <p>ご予約を受け付けました。内容の確認のため、担当よりご連絡いたします。当日、会場でお待ちしています。</p>
+        <p class="note">※現在はデモ表示です（送信先未設定）。</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ 12 フッター（会社情報・プライバシーポリシー） ============ -->
+<footer class="footer">
+  <div class="inner">
+    <p class="footer__logo"><picture><source type="image/webp" srcset="images/logo-full-green.webp"><img src="images/logo-full-green.png" width="659" height="72" loading="lazy" alt="株式会社つむぐホーム"></picture></p>
+    <address>
+      〒951-8061 新潟市中央区西堀通6番町884番地 第一カトウビル5F<br>
+      <a href="tel:0252113233">TEL 025-211-3233</a>（受付 10:00〜17:00）
+    </address>
+    <p class="footer__note">主催・施工：株式会社つむぐホーム</p>
+    <!-- 仮コピー：正式なプライバシーポリシーに差し替えてください -->
+    <details class="footer__policy" id="privacy-policy">
+      <summary>プライバシーポリシー</summary>
+      <p>ご入力いただいた個人情報（お名前・フリガナ・電話番号・メールアドレス・ご質問内容）は、見学会のご案内・ご連絡のみに利用し、法令に基づく場合を除き第三者に提供しません。<br>※正式なポリシーは確定後に差し替えます。</p>
+    </details>
+    <p class="footer__copy"><small>&copy; 株式会社つむぐホーム</small></p>
+  </div>
+</footer>
+
+
+</div><!-- /.page -->
+
+<!-- スマホ用 固定予約バー（フォーム表示中は非表示） -->
+<nav class="sticky-bar" aria-label="予約">
+  <a class="sticky-bar__tel" href="tel:0252113233"><span aria-hidden="true">☎</span> 電話</a>
+  <a class="sticky-bar__reserve" href="#reserve">見学予約<small>QUOカード特典</small></a>
+</nav>
+
+<!-- PC幅（≥1024px）のみ：右下の円形「見学予約はこちら」ボタン。スマホは上の固定バーを使用。フォーム表示中は非表示 -->
+<a class="fab is-hidden" href="#reserve" aria-label="見学予約はこちら（予約フォームへ移動）">
+  <span class="fab__txt" aria-hidden="true"><small>OPEN HOUSE</small><b>見学予約<br>はこちら</b><i>↓</i></span>
+</a>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
