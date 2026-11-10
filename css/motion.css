@@ -1,0 +1,59 @@
+/* =========================================================
+   モーション（やさしい版）：スクロール表示・写真ワイプ・FVの入場・Lenis用
+   ・調整値はこの :root の変数だけ（ぼかし量・上昇量・長さ・イージング・段差）
+   ・隠すのは「.js が付いていて、動きを減らす設定ではなく、.motion-off でない」ときだけ
+     → JS無効／読み込み失敗／prefers-reduced-motion では全て表示
+   ・opacity / filter / transform / clip-path だけを動かすので、レイアウトは動きません（CLSなし）
+   ========================================================= */
+:root{
+  --mo-blur:6px;                              /* 表示前のぼかし量 */
+  --mo-rise:16px;                             /* 表示前の下げ幅（translateY） */
+  --mo-dur:.9s;                               /* テキスト／カードの長さ（0.8〜1s） */
+  --mo-ease:cubic-bezier(.22,.61,.36,1);      /* ゆっくり止まるイーズ */
+  --mo-wipe-dur:1.1s;                         /* 写真ワイプの長さ */
+  --mo-wipe-scale:1.04;                       /* 写真の初期スケール */
+  --mo-fv-blur:6px;                           /* FV文字のぼかし */
+}
+
+@media (prefers-reduced-motion:no-preference){
+  /* ---------- 1. スクロール表示（JSが [data-reveal] を付ける） ---------- */
+  .js:not(.motion-off) [data-reveal]{
+    opacity:0;filter:blur(var(--mo-blur));transform:translateY(var(--mo-rise));
+    transition:opacity var(--mo-dur) var(--mo-ease),filter var(--mo-dur) var(--mo-ease),transform var(--mo-dur) var(--mo-ease);
+    will-change:opacity,filter,transform}
+  .js:not(.motion-off) [data-reveal="fade"]{filter:none}                 /* 大きい面（表・フォーム）はぼかさず軽く */
+  .js:not(.motion-off) [data-reveal].is-in{opacity:1;filter:blur(0);transform:none;transition-delay:var(--mo-d,0ms)}
+  .js:not(.motion-off) [data-reveal].is-done{filter:none;will-change:auto;transition:none}
+
+  /* ---------- 2. 写真ワイプ：上から下へクリップが開き、1.04→1へ静かに戻る ---------- */
+  .js:not(.motion-off) [data-wipe]{overflow:hidden}
+  .js:not(.motion-off) [data-wipe] > img,
+  .js:not(.motion-off) [data-wipe] > picture > img,
+  .js:not(.motion-off) [data-wipe] > video{
+    clip-path:inset(0 0 100% 0);transform:scale(var(--mo-wipe-scale));transform-origin:50% 40%;
+    transition:clip-path var(--mo-wipe-dur) var(--mo-ease),transform calc(var(--mo-wipe-dur) + .5s) var(--mo-ease);
+    will-change:clip-path,transform}
+  .js:not(.motion-off) [data-wipe].is-in > img,
+  .js:not(.motion-off) [data-wipe].is-in > picture > img,
+  .js:not(.motion-off) [data-wipe].is-in > video{clip-path:inset(0 0 0 0);transform:none;transition-delay:var(--mo-d,0ms)}
+  .js:not(.motion-off) [data-wipe].is-done > img,
+  .js:not(.motion-off) [data-wipe].is-done > picture > img,
+  .js:not(.motion-off) [data-wipe].is-done > video{clip-path:none;will-change:auto;transition:none}
+
+  /* ---------- 3. FVの入場（約1.6秒。背景は透明にせず .4 から＝LCPを遅らせない） ---------- */
+  .js:not(.motion-off) .fv__stage > picture:not(.fv__comp){animation:moBg .6s ease-out both}
+  .js:not(.motion-off) .fv__tate{animation:moFvIn .8s var(--mo-ease) .35s both}
+  .js:not(.motion-off) .fv__name-t{animation:moFvIn .8s var(--mo-ease) .6s both}
+  .js:not(.motion-off) .fv__open{animation:moFvIn .8s var(--mo-ease) .75s both}
+  .js:not(.motion-off) .fv__date{animation:moFvIn .7s var(--mo-ease) .9s both}
+  .js:not(.motion-off) .fv__name-t{display:inline-block}
+}
+@keyframes moBg{from{opacity:.4}to{opacity:1}}
+@keyframes moFvIn{from{opacity:0;filter:blur(var(--mo-fv-blur));translate:0 12px}to{opacity:1;filter:blur(0);translate:0 0}}
+
+/* ---------- 4. Lenis（MIT / js/vendor/lenis-LICENSE.txt）推奨CSS ---------- */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}
+.lenis [data-lenis-prevent],.lenis [data-lenis-prevent-wheel],.lenis [data-lenis-prevent-touch]{overscroll-behavior:contain}
+.lenis.lenis-smooth iframe{pointer-events:none}
