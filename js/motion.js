@@ -16,9 +16,9 @@
   };
   // 表示する要素（FV内は対象外）。fade＝ぼかさず軽く
   const REVEAL = [
-    '.eyebrow', '.h-serif', '.section-lead', '.info__feature', '.info__catch', '.sub-title',
+    '.eyebrow', '.h-serif', '.section-lead', '.info__feature', '.sub-title',
     '.charm', '.kw li', '.merit-list li', '.benefit-list li', '.faq-list details', '.spec-card', '.spec-list', '.snow',
-    '.shot__body', '.perk', '.note', '.cta-row', '.also', '.access__place', '.route', '.town li', '.access-map__frame', '.access-map__btn',
+    '.shot__body', '.perk', '.note', '.cta-row', '.also', '.access__place', '.route', '.access-map__frame', '.access-map__btn',
     '.worldview figcaption', '.tel-line', '.footer__logo', '.footer address', '.footer__policy',
   ];
   const REVEAL_FADE = ['.info-band', '.info-table', '.form', '.viewer__bar'];

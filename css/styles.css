@@ -189,7 +189,8 @@ p + p{margin-top:1em}
 .benefit-list__perk{background:var(--mustard)!important;border-color:var(--mustard)!important;color:var(--on-cta)}
 .benefit-list__perk span{font-size:17px;font-weight:700}
 .note--light{color:var(--ink-2)}
-.also{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;margin:28px 0;font-size:14px}
+.also{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin:28px 0;font-size:14px}
+.also p{margin:0}
 .also__label{border:1px solid var(--olive-dark);color:var(--olive-dark);padding:4px 8px;font-weight:700;font-size:12px;writing-mode:horizontal-tb}
 .benefit .btn{width:100%}
 
@@ -211,7 +212,6 @@ p + p{margin-top:1em}
    ========================================================= */
 .access{background:var(--cream)}
 .access__place{font-weight:700;margin-bottom:14px}
-.access__tbd{display:block;font-weight:400;font-size:12px;line-height:1.5;color:var(--ink-2);margin-top:2px}
 .access-map{margin:0}
 .access-map__frame{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:6px;overflow:hidden}
 @media(min-width:768px){.access-map__frame{padding:10px}}
@@ -222,9 +222,6 @@ p + p{margin-top:1em}
 .route{margin-top:20px}
 .route div{display:grid;grid-template-columns:4.2em 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
 .route dt{font-weight:700;color:var(--olive-dark);background:var(--olive-soft);border-radius:6px;text-align:center;align-self:start;font-size:13px;padding:2px 0}
-.town li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
-.town strong{display:block;font-size:15px;color:var(--ink)}
-.town em{font-style:normal;font-weight:700;color:var(--olive-dark);white-space:nowrap;align-self:center}
 
 /* =========================================================
    11 予約フォーム
@@ -404,14 +401,11 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 .photo--crop img{aspect-ratio:5/6;object-fit:cover}
 .photo--crop-l img{object-position:0% 50%}
 .photo--crop-r img{object-position:100% 50%}
-.photo--2f img{aspect-ratio:1220/768;object-fit:cover}
-.photo--2f{margin-bottom:0}
+.photo--2f img,.photo--washroom img{aspect-ratio:1220/768;object-fit:cover}
+.photo--2f,.photo--washroom{margin-bottom:0}
 .shot--card .photo figcaption{padding:6px 14px;background:#fff}
 .shot__body{padding:16px 20px 22px}
 .shot__title{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.5;margin-bottom:6px}
-.photo--ph{aspect-ratio:16/10;display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(135deg,#EFEADD 0 12px,#F5F1E7 12px 24px);color:var(--olive-dark)}
-.photo--ph span{display:grid;justify-items:center;gap:4px}
-.photo--ph small{color:var(--ink-2);font-size:12px}
 
 /* ---------- 06 Web見学（冒頭にムービー） ---------- */
 .plan{padding-top:0}
@@ -559,6 +553,11 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
   left:calc(50% - var(--u) * 0.5);transform:translateX(-50%);
   top:max(calc(var(--u) * 28), calc(var(--st) + var(--u) * 317))}
 .fv__tate span{display:block}
+/* v8 縦書きキャッチのみ影を強める（タイトル・他の文字は従来のまま）：締まった濃い芯の影＋広いやわらかい影。1px≒3.6u（390幅時） */
+.fv__tate{text-shadow:0 calc(var(--u)*4) calc(var(--u)*11) rgba(40,30,20,.55),
+  0 calc(var(--u)*3) calc(var(--u)*8) rgba(40,30,20,.4),
+  0 calc(var(--u)*7) calc(var(--u)*43) rgba(0,0,0,.35),
+  calc(var(--u)*4) calc(var(--u)*6) calc(var(--u)*12) rgba(0,0,0,.3)}
 /* 下部：リード一行／みまもりの家（マスタード）／モデルハウスOPEN／日付の枠 */
 .fv__lead{position:absolute;left:0;right:0;top:calc(var(--u) * 2181);margin:0;text-align:center;padding-left:calc(var(--u) * 9);
   font-size:calc(var(--u) * 66);line-height:1;font-weight:700;letter-spacing:.045em;font-feature-settings:"palt" 1;white-space:nowrap}
@@ -588,7 +587,6 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 @media (min-width:1024px){ .fv{min-height:0} }
 
 /* ---------- 03：FVから移した小さなキャッチ／ヘッダー（スマホは幅に収める） ---------- */
-.info__catch{font:600 clamp(16px,4.4vw,20px)/1.6 var(--serif);letter-spacing:.12em;color:var(--ink-2);margin:-6px 0 0}
 @media (max-width:1023px){ .site-header{gap:8px;padding-right:8px} .site-header__cta{padding:0 14px;font-size:13px} }
 .site-header__logo-img{aspect-ratio:auto}
 @media (min-width:1024px){ .fv{position:sticky;top:var(--hdr);height:calc(100vh - var(--hdr))} }
@@ -649,3 +647,26 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 .plan-svg .arc,.plan-svg .win{stroke-width:calc(.9px * var(--k,1))}
 .plan-svg .fixture{stroke-width:calc(1.1px * var(--k,1))}
 .plan-svg .fixture--bold{stroke-width:calc(1.5px * var(--k,1))}
+
+/* =========================================================
+   v8 ページ先頭へ戻るボタン（小さな半透明の丸。FAB／下部バーの少し上）
+   ・スマホ/タブレット(<1024px)：右端、下部予約バー(--bar-h)の上。バーが隠れる（フォーム表示中）時は下端へ降りる
+   ・PC(≥1024px)：FAB（132px）の真上に積む。FABが隠れている間は FAB の位置へ降りる
+   ========================================================= */
+.to-top{position:fixed;z-index:55;display:grid;place-items:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;
+  background:var(--olive-dark);color:#fff;cursor:pointer;opacity:0;visibility:hidden;pointer-events:none;
+  box-shadow:0 3px 10px rgba(40,40,20,.22);-webkit-tap-highlight-color:transparent;
+  right:max(12px,calc((100vw - var(--col)) / 2 + 12px));
+  bottom:calc(var(--bar-h) + 12px + env(safe-area-inset-bottom));
+  transform:translateY(8px);
+  transition:opacity .25s ease,transform .25s ease,bottom .25s ease,visibility .25s}
+.to-top.is-shown{opacity:.65;visibility:visible;pointer-events:auto;transform:none}
+.to-top.is-shown:hover,.to-top.is-shown:focus-visible{opacity:1}
+.to-top:focus-visible{outline:3px solid var(--mustard-dark);outline-offset:3px}
+.to-top:active{transform:translateY(1px)}
+body:has(.sticky-bar.is-hidden) .to-top{bottom:calc(16px + env(safe-area-inset-bottom))}
+@media (min-width:1024px){
+  .to-top{right:72px;bottom:172px}   /* FAB中心(右28+66)に合わせ、FAB上端(28+132)の12px上 */
+  body:has(.fab.is-hidden) .to-top{bottom:28px}
+}
+@media (prefers-reduced-motion:reduce){.to-top{transition:none}}

@@ -12,14 +12,14 @@
   //   本番では例： 'https://example.com/api/reserve' に差し替え（POST / FormData）。
   const FORM_ENDPOINT = '#';
 
-  // ▼ 開催日（仮）。確定後に差し替え。index.html の「開催日（仮）」ブロックも合わせて変更。
+  // ▼ 開催日。変更時は index.html の「開催日」ブロック・FVの日付も合わせて変更。
   const EVENT_DATES = [
     { value: '2026-12-12', label: '2026年12月12日(土)' },
     { value: '2026-12-13', label: '2026年12月13日(日)' },
     { value: '2026-12-19', label: '2026年12月19日(土)' },
     { value: '2026-12-20', label: '2026年12月20日(日)' },
   ];
-  // ▼ 時間枠（仮）。開催 10:00〜17:00・最終受付16:30 から作成。
+  // ▼ 時間枠。開催 10:00〜17:00・最終受付16:30 から作成。
   const TIME_SLOTS = ['10:00〜', '11:00〜', '12:00〜', '13:00〜', '14:00〜', '15:00〜', '16:00〜', '16:30〜（最終受付）'];
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -571,10 +571,10 @@
     if (!form) return;
     const $ = (id) => document.getElementById(id);
     const dateSel = $('f-date'), timeSel = $('f-time');
-    EVENT_DATES.forEach((d) => dateSel.add(new Option(d.label + '（仮）', d.value)));
+    EVENT_DATES.forEach((d) => dateSel.add(new Option(d.label, d.value)));
     TIME_SLOTS.forEach((t) => timeSel.add(new Option(t, t)));
     const slotsEl = document.querySelector('[data-time-slots]');
-    if (slotsEl) slotsEl.textContent = 'ご案内開始：' + TIME_SLOTS.map((t) => t.replace('（最終受付）', '')).join('／') + '（仮）';
+    if (slotsEl) slotsEl.textContent = 'ご案内開始：' + TIME_SLOTS.map((t) => t.replace('（最終受付）', '')).join('／');
 
     const steps = {
       input: form.querySelector('[data-step="input"]'),
@@ -693,6 +693,34 @@
     update();
   };
 
+  /* ---------- ページ先頭へ戻るボタン：600px 以上スクロールしたら表示。Lenis 有効時は Lenis で、動きを減らす設定では即時 ---------- */
+  const initToTop = () => {
+    const btn = document.querySelector('.to-top');
+    if (!btn) return;
+    const THRESHOLD = 600;
+    let shown = null;
+    const update = () => {
+      const on = (window.scrollY || document.documentElement.scrollTop) > THRESHOLD;
+      if (on === shown) return;
+      shown = on;
+      btn.classList.toggle('is-shown', on);
+      btn.tabIndex = on ? 0 : -1;
+      btn.setAttribute('aria-hidden', String(!on));
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+    btn.addEventListener('click', () => {
+      if (reduceMotion.matches) {
+        if (window.__lenis) { window.__lenis.destroy(); window.__lenis = null; }
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      } else if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  };
+
   /* ---------- ヘッダーメニュー／プライバシーポリシー ---------- */
   const initHeader = () => {
     const btn = document.querySelector('.site-header__menu');
@@ -718,6 +746,7 @@
     initMovie();
     initStickyBar();
     initFab();
+    initToTop();
     initHeader();
     initForm();
   });

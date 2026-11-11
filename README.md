@@ -6,7 +6,7 @@
 - `js/main.js` … 開催日 `EVENT_DATES`、時間 `TIME_SLOTS`、送信先 `FORM_ENDPOINT`（現在 `#` のダミー）
 - `js/viewer3d.js` … 3D間取り（three.js r170 同梱、MIT: `js/vendor/three-LICENSE.txt`）
 
-日付・コピーの一部は仮です（`仮` コメント参照）。
+コピーの一部は仮コピーです（HTML内の `仮コピー` コメント参照）。仕様数値の未確定項目は「仮」タグで表示しています。
 
 ## モーション（やさしい版）
 - `css/motion.css` … スクロール表示（ぼかし→くっきり＋ふわっと上昇）、写真のクリップワイプ、FVの入場アニメ。**調整値は先頭の `:root`**（`--mo-blur` ぼかし量、`--mo-rise` 上昇量、`--mo-dur` 長さ、`--mo-wipe-dur`／`--mo-wipe-scale` 写真ワイプ、`--mo-fv-blur`、FVの順番は各 `animation` の遅延）。
@@ -29,4 +29,8 @@
 
 - `images/access-map.svg`：Illustratorで作成した地図（文字アウトライン済み・マスク使用・viewBox 0 0 212.5 116.36）。無加工で配置（svgoは描画差が出たため不使用）。
 - `index.html` の `#access` で `<img width="1000" height="548">` として表示（CLS防止）。白カード枠は `.access-map__frame`。
-- 「Googleマップで開く」は現在「新潟市中央区美沢台2丁目」の検索URL。**番地確定後にピン位置のURLへ差し替え**（HTML内コメント参照）。
+- 「Googleマップで開く」は会場住所「新潟市中央区美沢台2丁目123-4」の検索URL。ピン位置のURLが確定したら差し替え。
+
+## v8 メモ
+- `images/washroom-{720,1220}.{webp,jpg}`：洗面・室内干しの生成画像（実物ではないため「※イメージ」表記）。元画像は `/workspace/modelhouse-assets/washroom-generated-1152.jpg`。実写に差し替える時は同名で置き換え、`index.html` の「※イメージ」を外す。
+- 「ページ先頭へ戻る」`.to-top`：600px以上スクロールで表示（`js/main.js` initToTop）。PCはFABの上、スマホは下部バーの上。

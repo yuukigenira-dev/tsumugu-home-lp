@@ -91,7 +91,7 @@
     <div class="fv__text fv__bottom">
       <p class="fv__lead">子どもの声が、いつも届く日常。</p>
       <h1 class="fv__name"><span class="fv__name-t"><span class="fv__name-g">みまもりの家</span></span><span class="fv__open">モデルハウスOPEN</span></h1>
-      <!-- 仮：日付確定後に差し替え（FV・03の表・フォーム js/main.js の EVENT_DATES を合わせる） -->
+      <!-- 日付変更時は FV・03の表・フォーム（js/main.js の EVENT_DATES）を合わせる -->
       <div class="fv__date">
         <p class="fv__date-d"><span><sup>12/</sup>12<small>(土)</small></span> <span>13<small>(日)</small></span> <span>19<small>(土)</small></span> <span>20<small>(日)</small></span></p>
         <p class="fv__date-t">完成見学会開催</p>
@@ -112,24 +112,21 @@
     <h2 class="h-serif" id="info-title">みまもりの家、<br>モデルハウスOPEN。</h2>
     <p class="info__feature">「キッチンから、ぜんぶ見える家」</p>
     <p class="section-lead">新潟市中央区美沢台に、つむぐホームのモデルハウス「みまもりの家」がOPEN。</p>
-    <!-- 仮コピー（FVから移した小さなキャッチ） -->
-    <p class="info__catch">暮らしを、見に行こう。</p>
     <p class="cta-row"><a class="btn btn--primary" href="#reserve" data-main-cta>見学を予約する</a></p>
 
     <div class="info-band"><span>INFORMATION</span></div>
     <table class="info-table">
       <caption class="visually-hidden">モデルハウス見学会の開催情報</caption>
       <tbody>
-        <tr><th scope="row">会場</th><td>つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目<span class="tentative">仮</span><small class="access__tbd">※番地は確定後に記載</small></td></tr>
-        <!-- ▼▼ 開催日（仮）：確定後に差し替えてください。FVの帯・丸バッジ、フォームの日付（js/main.js の EVENT_DATES）も合わせて変更 ▼▼ -->
-        <tr><th scope="row">開催日</th><td>2026年12月12日(土)・13日(日)<br>19日(土)・20日(日)<span class="tentative">仮</span></td></tr>
-        <!-- ▲▲ 開催日（仮）ここまで ▲▲ -->
+        <tr><th scope="row">会場</th><td>つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目123-4</td></tr>
+        <!-- ▼▼ 開催日：変更時はFVの帯・丸バッジ、フォームの日付（js/main.js の EVENT_DATES）も合わせて変更 ▼▼ -->
+        <tr><th scope="row">開催日</th><td>2026年12月12日(土)・13日(日)<br>19日(土)・20日(日)</td></tr>
+        <!-- ▲▲ 開催日 ここまで ▲▲ -->
         <tr><th scope="row">時間</th><td>10:00〜17:00<small>（最終受付16:30）</small><span class="info-slots" data-time-slots>ご案内開始：10:00〜／11:00〜／12:00〜／13:00〜／14:00〜／15:00〜／16:00〜／16:30〜</span></td></tr>
-        <tr><th scope="row">アクセス</th><td>JR美沢台駅から徒歩12分／駐車場2台<a href="#access">詳しい道順</a></td></tr>
+        <tr><th scope="row">アクセス</th><td>JR美沢台駅から徒歩10分／駐車場2台<a href="#access">詳しい道順</a></td></tr>
         <tr><th scope="row">備考</th><td>ご予約優先（ご予約なしでもご参加いただけます）。見学無料・お子様連れ歓迎。室内の撮影はご遠慮ください。</td></tr>
       </tbody>
     </table>
-    <p class="note">※ご案内開始時間は仮です。確定後に差し替えます。</p>
     <div class="perk" role="group" aria-label="ご予約来場特典">
       <div class="perk__badge"><small>ご予約来場特典</small><b>QUOカード</b><strong>500円分</strong><em>プレゼント！</em></div>
       <p class="perk__text">WEBまたはお電話でご予約ください<small>（前日まで受付）</small></p>
@@ -231,11 +228,15 @@
         <p>引き戸を開ければリビングとひとつながり。遊び場にも、お昼寝にも、客間にも。</p>
       </div>
     </article>
-    <!-- 洗面・室内干し：写真未支給のためプレースホルダー -->
+    <!-- 洗面・室内干し：生成画像（実物ではないため「※イメージ」を表示。実写に差し替える場合は images/washroom-*.webp/jpg を置き換え） -->
     <article class="shot shot--card">
-      <div class="photo photo--ph" role="img" aria-label="洗面・室内干しスペースの写真は準備中です">
-        <span><svg class="icon icon--lg" aria-hidden="true" focusable="false"><use href="#i-laundry"/></svg><b>洗面・室内干しスペース</b><small>写真は準備中（現地でご覧ください）</small></span>
-      </div>
+      <figure class="photo photo--washroom">
+        <picture>
+        <source type="image/webp" srcset="images/washroom-720.webp 720w, images/washroom-1220.webp 1220w" sizes="(min-width: 1024px) 640px, 100vw">
+        <img src="images/washroom-720.jpg" srcset="images/washroom-720.jpg 720w, images/washroom-1220.jpg 1220w" sizes="(min-width: 1024px) 640px, 100vw" width="1220" height="768" loading="lazy" decoding="async" alt="明るい洗面脱衣室。右手にカウンターと大きな鏡のある洗面台、奥の窓の前には天井から吊るした室内干しのポールに、タオルと子ども服が掛かっている。">
+      </picture>
+        <figcaption>※イメージ</figcaption>
+      </figure>
       <div class="shot__body">
         <h3 class="shot__title">洗面・室内干しスペース</h3>
         <p>雪の日も梅雨の日も頼れる室内干しスペースと、キッチンから続く回遊の家事動線。</p>
@@ -457,29 +458,20 @@
   <div class="inner">
     <p class="eyebrow">ACCESS</p>
     <h2 class="h-serif" id="access-title">交通のご案内</h2>
-    <p class="access__place">会場：つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目<small class="access__tbd">※番地は確定後に記載</small></p>
+    <p class="access__place">会場：つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目123-4</p>
     <figure class="access-map">
       <div class="access-map__frame">
         <img src="images/access-map.svg" width="1000" height="548" loading="lazy" decoding="async"
              alt="会場への地図。美沢台駅から駅前通りを南へ進み、国道8号の信号を越えて、スーパー美沢台の先（南）の区画が会場です。会場は駅前通りの東側で、西側の美沢台小学校の向かい、東側には中央公園があります。ほかに郵便局、セブンイレブン、市立図書館、美沢台メディカルゾーン、美沢台入口バス停の位置も示しています。">
       </div>
-      <!-- 仮：番地確定後にピン位置のURLへ差し替え（現在は「新潟市中央区美沢台2丁目」の検索結果を開く） -->
-      <a class="access-map__btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E7%BE%8E%E6%B2%A2%E5%8F%B02%E4%B8%81%E7%9B%AE" target="_blank" rel="noopener noreferrer">Googleマップで開く<span class="visually-hidden">（新しいタブで開きます）</span></a>
+      <a class="access-map__btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%96%B0%E6%BD%9F%E5%B8%82%E4%B8%AD%E5%A4%AE%E5%8C%BA%E7%BE%8E%E6%B2%A2%E5%8F%B02%E4%B8%81%E7%9B%AE123-4" target="_blank" rel="noopener noreferrer">Googleマップで開く<span class="visually-hidden">（新しいタブで開きます）</span></a>
     </figure>
     <dl class="route">
       <div><dt>お車</dt><dd>新潟中央ICから国道8号経由 約20分。駐車場2台（満車時は係員誘導）</dd></div>
-      <div><dt>バス</dt><dd>JR新潟駅南口バス停C61から「美沢台入口」で下車、徒歩3分。</dd></div>
-      <div><dt>JR</dt><dd>JR美沢台駅から徒歩12分。</dd></div>
+      <div><dt>バス</dt><dd>JR新潟駅南口バス停C61から「美沢台入口」で下車、徒歩5分。</dd></div>
+      <div><dt>JR</dt><dd>JR美沢台駅から徒歩10分。</dd></div>
     </dl>
     <p class="note">※現地には旗を立ててご案内しています。ご不明な場合はお気軽にお電話ください。</p>
-    <h3 class="sub-title">美沢台の暮らし</h3>
-    <ul class="town">
-      <li><span><strong>美沢台中央公園</strong>遊具と芝生の広場</span><em>徒歩3分</em></li>
-      <li><span><strong>美沢台小学校</strong>歩道つきの通学路</span><em>徒歩6分</em></li>
-      <li><span><strong>スーパー・ドラッグストア</strong>夜10時まで営業</span><em>徒歩7分</em></li>
-      <li><span><strong>市立図書館 美沢台分館</strong>読み聞かせ会も開催</span><em>徒歩8分</em></li>
-      <li><span><strong>美沢台メディカルゾーン</strong>内科・小児科・調剤</span><em>徒歩10分</em></li>
-    </ul>
   </div>
 </section>
 <section class="reserve" id="reserve" aria-labelledby="reserve-title">
@@ -614,6 +606,9 @@
 </nav>
 
 <!-- PC幅（≥1024px）のみ：右下の円形「見学予約はこちら」ボタン。スマホは上の固定バーを使用。フォーム表示中は非表示 -->
+<button type="button" class="to-top" aria-label="ページの先頭へ戻る" aria-hidden="true" tabindex="-1">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 15l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
 <a class="fab is-hidden" href="#reserve" aria-label="見学予約はこちら（予約フォームへ移動）">
   <span class="fab__txt" aria-hidden="true"><small>OPEN HOUSE</small><b>見学予約<br>はこちら</b><i>↓</i></span>
 </a>
