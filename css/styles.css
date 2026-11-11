@@ -189,9 +189,10 @@ p + p{margin-top:1em}
 .benefit-list__perk{background:var(--mustard)!important;border-color:var(--mustard)!important;color:var(--on-cta)}
 .benefit-list__perk span{font-size:17px;font-weight:700}
 .note--light{color:var(--ink-2)}
-.also{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin:28px 0;font-size:14px}
+.also{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;margin:28px 0;font-size:14px}
 .also p{margin:0}
-.also__label{border:1px solid var(--olive-dark);color:var(--olive-dark);padding:4px 8px;font-weight:700;font-size:12px;writing-mode:horizontal-tb}
+/* ラベルの中心を見出し「スマートホーム説明会」1行目の字面中心に合わせる：見出し行(14px×1.85)の中心 − ラベル高(12px×1.85+パディング8px+枠2px)の半分 */
+.also .also__label{margin-top:calc(14px * 1.85 / 2 - (12px * 1.85 + 10px) / 2);border:1px solid var(--olive-dark);color:var(--olive-dark);padding:4px 8px;font-weight:700;font-size:12px;writing-mode:horizontal-tb}
 .benefit .btn{width:100%}
 
 /* =========================================================
