@@ -6,6 +6,7 @@
        mount(container, data, { onSelect, reducedMotion })
        setFloor(floorId)   … '1f' | '2f'
        select(roomId)      … ハイライトのみ（onSelect は呼ばない）
+       setFlows(bool)      … 「動線を表示」（家事動線・見守り視線の点線）
        resetView()         … 回転リセット
        setActive(bool)     … 表示中かどうか（非表示中は描画停止）
        destroy()
@@ -14,13 +15,15 @@
 import * as THREE from './vendor/three.module.min.js';
 import { OrbitControls } from './vendor/OrbitControls.js';
 
-const S = 1 / 20;                 // 間取り座標(px) → 3D単位
-const CX = 180, CY = 190;         // 1F建物中心
-const FLOOR_OFFSET_Y = { '1f': 0, '2f': 50 };  // 2Fの図面Y座標を1Fに重ねるためのずれ
+const S = 1 / 20;                 // 間取り座標(px：チラシ画像のピクセル) → 3D単位
+const CENTER = { '1f': [234.5, 260], '2f': [770, 257.5] };   // 各階の建物中心（main.js の PLAN_DATA で上書き）
 const LEVEL_Y = { '1f': 0, '2f': 1.7 };        // 階の高さ（模型的に圧縮）
 const WALL_H = 0.85;              // 低い壁（実寸の約1/3）
-const WALL_T = 0.12;
+const DOOR_H = 0.58;              // 扉・引き戸の開口高さ（この上に低いまぐさ）
+const SILL_H = 0.3, WIN_H = 0.62; // 窓の腰高・上端
 const MUSTARD = new THREE.Color('#C9912A');
+
+const FLOW_COLORS = { chores: '#D79F2E', sight: '#6E8A35' };   // 家事動線＝マスタード／見守り視線＝オリーブ
 
 const FLOOR_COLORS = {
   wood: '#E6D3B3', wood2: '#EDDFC6', tatami: '#D3D5AC', wet: '#E3E8E9', tile: '#D6D2C9',
@@ -32,13 +35,12 @@ const ROOM_FLOOR = {
   deck: 'deck', garden: 'lawn', carport: 'carport',
   free: 'wood2', storage: 'wood2', kids: 'wood', balcony: 'balcony',
 };
-const NO_WALL = new Set(['deck', 'garden', 'carport', 'balcony', 'kitchen']);
 
-const toXZ = (floorId, x, y) => [(x - CX) * S, (y + FLOOR_OFFSET_Y[floorId] - CY) * S];
+const toXZ = (floorId, x, y) => [(x - CENTER[floorId][0]) * S, (y - CENTER[floorId][1]) * S];
 
 export function create3DViewer() {
   let container, data, opts, renderer, scene, camera, controls, raycaster, pointer;
-  let floorId = '1f', selectedId = null, active = true, onscreen = true, dirty = true, rafId = 0;
+  let floorId = '1f', flowsOn = false, selectedId = null, active = true, onscreen = true, dirty = true, rafId = 0;
   let anim = null, io, ro;
   const floors = {};          // floorId -> { group, pickables:[], rooms:{id:{mesh, baseColor, edge}}, mats:[], labels:[] }
   const HOME = { az: -0.5, polar: 0.7, dist: 33 };
@@ -92,16 +94,107 @@ export function create3DViewer() {
   };
 
   /* ---------- 模型の生成 ---------- */
+  const glassMat = (mats) => {
+    const m = new THREE.MeshStandardMaterial({ color: '#BFDDE8', roughness: 0.15, metalness: 0, transparent: true, opacity: 0.42, depthWrite: false });
+    mats.push(m); return m;
+  };
+
+  // 壁・開口（壁は開口の範囲で本当に切れている。上に低いまぐさ／窓は腰壁＋ガラス）
+  const buildWalls = (fl, fid, group, mats) => {
+    const put = (axis, at, s0, e0, y0, y1, th, color, mat) => {
+      const len = (e0 - s0) * S, h = y1 - y0;
+      const [cx, cz] = axis === 'h' ? toXZ(fid, (s0 + e0) / 2, at) : toXZ(fid, at, (s0 + e0) / 2);
+      const m = mat ? new THREE.Mesh(new THREE.BoxGeometry(axis === 'h' ? len : th, h, axis === 'h' ? th : len), mat) : box(axis === 'h' ? len : th, h, axis === 'h' ? th : len, color, mats);
+      m.position.set(cx, y0 + h / 2, cz);
+      group.add(m);
+      return m;
+    };
+    fl.geom.pieces.forEach((p) => {
+      const th = p.ext ? 0.14 : 0.11, ex = (th / 2) / S;
+      put(p.axis, p.at, p.s - (p.sCut ? 0 : ex), p.e + (p.eCut ? 0 : ex), 0, WALL_H, th, p.ext ? '#FFFFFF' : '#FBFBF8');
+    });
+    fl.geom.openings.forEach((g) => {
+      const th = g.ext ? 0.14 : 0.11, len = g.b - g.a, h = g.axis === 'h';
+      if (g.kind === 'door' || g.kind === 'slide') {
+        put(g.axis, g.at, g.a, g.b, DOOR_H, WALL_H, th, '#FBFBF8');                    // 低いまぐさ
+      }
+      if (g.kind === 'window') {
+        put(g.axis, g.at, g.a, g.b, 0, SILL_H, th, '#FBFBF8');                          // 腰壁
+        put(g.axis, g.at, g.a, g.b, WIN_H, WALL_H, th, '#FBFBF8');                      // まぐさ
+        put(g.axis, g.at, g.a, g.b, SILL_H, WIN_H, 0.03, null, glassMat(mats));         // ガラス
+      }
+      if (g.kind === 'slide') {
+        const pw = len * 0.56, off = 0.045;
+        [[g.a, g.a + pw, -off], [g.b - pw, g.b, off]].forEach(([s0, e0, o]) => {
+          const m = put(g.axis, g.at, s0, e0, 0.02, DOOR_H - 0.02, 0.035, '#F1ECE0');
+          m.position[h ? 'z' : 'x'] += o;
+        });
+      }
+      if (g.kind === 'door') {
+        // 開いた扉板（90°）と床の開き軌跡（四分円）
+        const c = g.hingePt, t = g.tipPt, e = g.endPt;
+        const [hx, hz] = toXZ(fid, c[0], c[1]), [tx, tz] = toXZ(fid, t[0], t[1]);
+        const dirX = g.dir[0] !== 0;
+        const leaf = box(dirX ? Math.abs(tx - hx) : 0.05, DOOR_H - 0.04, dirX ? 0.05 : Math.abs(tz - hz), '#CDAE82', mats);
+        leaf.position.set((hx + tx) / 2, (DOOR_H - 0.04) / 2 + 0.02, (hz + tz) / 2);
+        group.add(leaf);
+        const u = [g.dir[0], g.dir[1]], r = g.r * S;
+        const v = [(e[0] - c[0]) / g.r, (e[1] - c[1]) / g.r];
+        const pts = [];
+        for (let i = 0; i <= 16; i++) {
+          const a = (i / 16) * Math.PI / 2;
+          pts.push(new THREE.Vector3(hx + r * (Math.cos(a) * u[0] + Math.sin(a) * v[0]), 0.075, hz + r * (Math.cos(a) * u[1] + Math.sin(a) * v[1])));
+        }
+        const lm = new THREE.LineBasicMaterial({ color: '#8B877C', transparent: true });
+        mats.push(lm);
+        group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lm));
+      }
+    });
+  };
+
+  // 動線オーバーレイ（家事動線／見守り視線）：床の上の点線＋矢じり
+  const buildFlows = (fl, fid) => {
+    const g = new THREE.Group();
+    g.visible = false;
+    (fl.flows || []).forEach((flow) => {
+      const mat = new THREE.MeshBasicMaterial({ color: FLOW_COLORS[flow.kind] });
+      const pts = flow.pts.map(([x, y]) => toXZ(fid, x, y));
+      const DASH = 0.5, GAP = 0.34, Wd = 0.17, Y = 0.12;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const [ax, az] = pts[i], [bx, bz] = pts[i + 1];
+        const L = Math.hypot(bx - ax, bz - az), ang = -Math.atan2(bz - az, bx - ax);
+        const end = i === pts.length - 2 ? L - 0.42 : L;       // 最終区間は矢じりぶん手前まで
+        for (let d = 0; d < end; d += DASH + GAP) {
+          const len = Math.min(DASH, end - d);
+          if (len < 0.12) continue;
+          const m = new THREE.Mesh(new THREE.BoxGeometry(len, 0.035, Wd), mat);
+          const k = (d + len / 2) / L;
+          m.position.set(ax + (bx - ax) * k, Y, az + (bz - az) * k);
+          m.rotation.y = ang;
+          g.add(m);
+        }
+      }
+      // 矢じり
+      const [ax, az] = pts[pts.length - 2], [bx, bz] = pts[pts.length - 1];
+      const tri = new THREE.Shape(); tri.moveTo(0.34, 0); tri.lineTo(-0.34, 0.3); tri.lineTo(-0.34, -0.3); tri.closePath();
+      const geo = new THREE.ShapeGeometry(tri); geo.rotateX(-Math.PI / 2);
+      const ah = new THREE.Mesh(geo, mat);
+      ah.position.set(bx, Y + 0.01, bz); ah.rotation.y = -Math.atan2(bz - az, bx - ax);
+      g.add(ah);
+    });
+    return g;
+  };
+
   const buildFloor = (floor) => {
     const fid = floor.id;
     const group = new THREE.Group();
     group.position.y = LEVEL_Y[fid];
-    const f = { group, pickables: [], rooms: {}, mats: [], labels: [] };
+    const f = { group, pickables: [], rooms: {}, mats: [], labels: [], flows: null };
     const mats = f.mats;
 
-    // 建物の床ベース
-    const base = fid === '1f' ? rectPts(20, 70, 320, 240) : rectPts(20, 30, 320, 220);
-    group.add(slab(fid, base, '#EFEBE3', 0.18, -0.18, mats));
+    // 建物の床ベース（外壁の矩形）
+    const [bx0, by0, bx1, by1] = floor.bounds;
+    group.add(slab(fid, rectPts(bx0, by0, bx1 - bx0, by1 - by0), '#EFEBE3', 0.18, -0.18, mats));
 
     // 部屋の床
     floor.rooms.forEach((r) => {
@@ -142,19 +235,6 @@ export function create3DViewer() {
       group.add(hl);
       f.rooms[r.id].edge = hl;
 
-      // 壁（部屋の輪郭に沿って低い壁）
-      if (!NO_WALL.has(r.id)) {
-        r.shape.forEach((p, i) => {
-          const q = r.shape[(i + 1) % r.shape.length];
-          const [ax, az] = toXZ(fid, p[0], p[1]), [bx, bz] = toXZ(fid, q[0], q[1]);
-          const len = Math.hypot(bx - ax, bz - az);
-          if (len < 0.05) return;
-          const w = box(len + WALL_T, WALL_H, WALL_T, '#FBFBF8', mats);
-          w.position.set((ax + bx) / 2, WALL_H / 2, (az + bz) / 2);
-          w.rotation.y = -Math.atan2(bz - az, bx - ax);
-          group.add(w);
-        });
-      }
       if (r.id === 'balcony') {
         // バルコニーの手すり（低い）
         const [X0, Z0] = toXZ(fid, r.shape[0][0], r.shape[0][1]), [X1, Z1] = toXZ(fid, r.shape[2][0], r.shape[2][1]);
@@ -176,30 +256,45 @@ export function create3DViewer() {
       // ラベル
       const label = makeLabel(r.label ? r.label : r.name + (r.size && !/台|BBQ|物干し/.test(r.size) ? ' ' + r.size : ''));
       label.position.set(lx, ext ? 0.6 : WALL_H + 0.45, lz);
+      if (r.id === 'carport') label.position.set(lx, 1.9, toXZ(fid, 0, r.shape[0][1])[1] + 0.3);   // SCのラベルと重ならないよう奥・上へ
       group.add(label);
       f.labels.push(label);
     });
 
-    // 階段（非選択）
-    const st = fid === '1f' ? { x: 165, y: 70, w: 45, h: 55 } : { x: 150, y: 30, w: 60, h: 55 };
-    const steps = 6;
-    for (let i = 0; i < steps; i++) {
-      const [X0, Z0] = toXZ(fid, st.x, st.y + (st.h / steps) * i);
-      const [X1, Z1] = toXZ(fid, st.x + st.w, st.y + (st.h / steps) * (i + 1));
-      const s = box(X1 - X0, 0.08 + i * 0.12, Z1 - Z0, '#CDB08A', mats);
-      s.position.set((X0 + X1) / 2, (0.08 + i * 0.12) / 2, (Z0 + Z1) / 2);
-      group.add(s);
-    }
-    // 2Fの収納（CL）
-    if (fid === '2f') {
-      [[130, 150], [180, 150]].forEach(([x, y]) => {
-        const [X0, Z0] = toXZ(fid, x, y), [X1, Z1] = toXZ(fid, x + 50, y + 14);
-        const cl = box(X1 - X0, 0.6, Z1 - Z0, '#E7DCC8', mats); cl.position.set((X0 + X1) / 2, 0.3, (Z0 + Z1) / 2); group.add(cl);
-      });
-      // 可動間仕切りの位置（点線の代わりに細い帯）
-      const [X, Z0] = toXZ(fid, 180, 166), [, Z1] = toXZ(fid, 180, 250);
-      const sp = box(0.05, 0.02, Z1 - Z0, '#6B7A3A', mats); sp.position.set(X, 0.08, (Z0 + Z1) / 2); group.add(sp);
-    }
+    // 壁・開口
+    buildWalls(floor, fid, group, mats);
+
+    // 階段・収納・家具・設備
+    (floor.fixtures || []).forEach((fx) => {
+      if (fx.t === 'stairs') {
+        const n = fx.ys.length, y0 = fx.ys[0] - 4.5, y1 = fx.ys[n - 1] + 4.5, dep = (y1 - y0) / n;
+        for (let i = 0; i < n; i++) {
+          // 1F：南（ホール側）が低く北へ上る／2F：南（フリースペース側）が高い
+          const hgt = fid === '1f' ? 0.08 + (n - 1 - i) * 0.12 : 0.08 + i * 0.12;
+          const [X0, Z0] = toXZ(fid, fx.x1, y0 + dep * i), [X1, Z1] = toXZ(fid, fx.x2, y0 + dep * (i + 1));
+          const st = box(X1 - X0, hgt, Z1 - Z0, '#CDB08A', mats);
+          st.position.set((X0 + X1) / 2, hgt / 2, (Z0 + Z1) / 2);
+          group.add(st);
+        }
+      } else if (fx.t === 'box' || fx.t === 'ext') {
+        const [X0, Z0] = toXZ(fid, fx.x, fx.y), [X1, Z1] = toXZ(fid, fx.x + fx.w, fx.y + fx.h);
+        const hh = fx.h3d || 0.5;
+        const b = box(X1 - X0, hh, Z1 - Z0, fx.t === 'ext' ? '#D5D3CC' : (fx.fill && fx.fill !== '#fff' ? '#E7DCC8' : '#EFE6D3'), mats);
+        b.position.set((X0 + X1) / 2, hh / 2 + (fx.t === 'ext' ? -0.1 : 0.06), (Z0 + Z1) / 2);
+        group.add(b);
+        if (fx.lbl && fx.lbl[0] !== 'CL') {
+          const l = makeLabel(fx.lbl[0]); l.position.set(b.position.x, hh + 0.55, b.position.z);
+          l.scale.multiplyScalar(0.75); group.add(l); f.labels.push(l);
+        }
+      } else if (fx.t === 'dash' && fx.cls === 'split') {
+        // 将来の可動間仕切りの位置（点線の代わりに細い帯）
+        const [X, Z0] = toXZ(fid, fx.pts[0][0], fx.pts[0][1]), [, Z1] = toXZ(fid, fx.pts[1][0], fx.pts[1][1]);
+        const sp = box(0.05, 0.02, Z1 - Z0, '#6B7A3A', mats); sp.position.set(X, 0.08, (Z0 + Z1) / 2); group.add(sp);
+      }
+    });
+
+    f.flows = buildFlows(floor, fid);
+    group.add(f.flows);
     mats.forEach((m) => (m.userData.baseOpacity = m.opacity));
     return f;
   };
@@ -219,6 +314,7 @@ export function create3DViewer() {
     const ground = new THREE.Mesh(new THREE.CircleGeometry(19, 64), new THREE.MeshStandardMaterial({ color: '#B9C79A', roughness: 1 }));
     ground.rotation.x = -Math.PI / 2; ground.position.y = -0.2; ground.receiveShadow = true;
     scene.add(ground);
+    data.floors.forEach((fl) => { CENTER[fl.id] = fl.center; });
     data.floors.forEach((fl) => { floors[fl.id] = buildFloor(fl); scene.add(floors[fl.id].group); });
   };
 
@@ -236,7 +332,12 @@ export function create3DViewer() {
     f1.labels.forEach((l) => (l.visible = !is2));
     Object.values(f1.rooms).forEach((r) => r.edge && (r.edge.visible = !is2 && r.edge.visible));
     controls.target.set(0, is2 ? LEVEL_Y['2f'] * 0.6 : 0, 0.4);
+    applyFlows();
     applySelection();
+    requestRender();
+  };
+  const applyFlows = () => {
+    Object.entries(floors).forEach(([id, f]) => { f.flows.visible = flowsOn && id === floorId; });
     requestRender();
   };
   const applySelection = () => {
@@ -385,7 +486,9 @@ export function create3DViewer() {
     },
     setFloor(id) { floorId = id; if (selectedId && !floors[id].rooms[selectedId]) selectedId = null; applyFloor(); },
     select(id) { selectedId = id; applySelection(); },
+    setFlows(on) { flowsOn = !!on; if (floors['1f']) applyFlows(); },
     resetView() { animateTo(HOME, 700); },
+    setView(az, polar, dist) { anim = null; setSpherical(az, polar, dist); controls.update(); requestRender(); }, // 検証用
     setActive(on) { active = on; if (on) { resize(); requestRender(); } },
     rotateBy(dAz) { const s = getSpherical(); animateTo({ ...s, az: s.az + dAz }, 300); }, // キーボード操作用
     projectRoom(id) { // 部屋中心のキャンバス内座標（検証用）

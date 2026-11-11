@@ -288,7 +288,7 @@
       - 3D模型：js/viewer3d.js（three.js r170 を js/vendor/ に同梱、セクション接近時に遅延読み込み）
       - 平面図：js/main.js の FloorViewers["2d"]（インラインSVG）
       どちらも同じインターフェース { mount(container, data, {onSelect}), setFloor(id), select(roomId), destroy() } を持ち、
-      部屋データは js/main.js の PLAN_DATA に集約。WebGL が使えない環境では平面図のみ表示します。
+      部屋・壁・扉データは js/main.js の PLAN_DATA に集約（チラシの図面座標）。WebGL が使えない環境では平面図のみ表示します。
     -->
     <div class="viewer" data-viewer="3d" id="floor-viewer">
       <div class="viewer__bar">
@@ -303,6 +303,11 @@
         <button type="button" role="tab" id="tab-2f" aria-controls="panel-floor" aria-selected="false" data-floor="2f" tabindex="-1">2F</button>
       </div>
       <div class="viewer__panel" id="panel-floor" role="tabpanel" aria-labelledby="tab-1f">
+        <!-- 動線オーバーレイ（2D・3D共通。既定はオフ） -->
+        <div class="viewer__flows">
+          <button type="button" class="viewer__flowbtn" data-action="flows" aria-pressed="false">動線を表示</button>
+          <p class="viewer__legend" hidden><span class="key key--chores">家事動線</span><span class="key key--sight">見守り視線</span><span class="key-note key" hidden>2Fに表示する動線はありません</span></p>
+        </div>
         <div class="viewer__stage viewer__stage--3d" data-stage="3d" data-lenis-prevent-wheel>
           <p class="viewer3d__loading">3D模型を読み込み中…</p>
           <!-- 仮コピー -->
