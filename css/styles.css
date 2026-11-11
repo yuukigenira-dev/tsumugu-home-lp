@@ -211,6 +211,7 @@ p + p{margin-top:1em}
    ========================================================= */
 .access{background:var(--cream)}
 .access__place{font-weight:700;margin-bottom:14px}
+.access__tbd{display:block;font-weight:400;font-size:12px;line-height:1.5;color:var(--ink-2);margin-top:2px}
 .map-placeholder{aspect-ratio:16/10;border-radius:var(--radius);border:2px dashed #B9B39F;background:#EFEBDF;display:grid;place-content:center;text-align:center;color:var(--ink-2);gap:6px;padding:16px}
 .map-placeholder span{font-weight:700;letter-spacing:.2em}
 .map-placeholder small{font-size:12px}
@@ -528,13 +529,13 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 /* =========================================================
    v5：FV＝文字なし背景画像＋HTML文字（Photoshop原画 firstview.jpg 1440×2999 の実測比率で再現）
    ・--u は「原画の1px」に相当する長さ。FV幅（またはFVの高さ）に追従して全体が同じ比率で拡縮
-   ・画像は幅基準で表示し、縦が足りない画面ではまず下の芝生（下端6.6%）を切り、それでも足りなければ上（天井）を切る
+   ・画像は幅基準で表示し、縦が足りない画面ではまず下の芝生（日付枠の下）を切り、それでも足りなければ上（天井）を切る
    ========================================================= */
 .fv{position:relative;overflow:hidden;background:#dfe6e8;color:#fff;container:fv / size;
   height:calc(100vh - var(--hdr) - var(--bar-h));height:calc(100svh - var(--hdr) - var(--bar-h) - env(safe-area-inset-bottom));min-height:360px;
   --w:max(100cqw, calc(100cqh * 1440 / 2999));            /* 画像（ステージ）の表示幅 */
   --u:calc(var(--w) / 1440);                                /* 原画1pxぶん */
-  --st:min(0px, calc(100cqh - var(--w) * 1.945));          /* ステージ上端（下端6.6%まで切ってよい） */
+  --st:min(0px, calc(100cqh - var(--w) * 1.975));          /* ステージ上端（日付枠の下に約14px分の余白を残し、それより下の芝生は切ってよい） */
   --tk:1}
 .fv__stage{position:absolute;left:50%;top:var(--st);width:var(--w);height:calc(var(--w) * 2999 / 1440);transform:translateX(-50%)}
 .fv__stage picture{position:absolute;inset:0;display:block}
@@ -548,18 +549,25 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 
 .fv__text{color:#fff;font-family:var(--sans);font-weight:900;font-feature-settings:"palt" 0;
   text-shadow:calc(var(--u)*4) calc(var(--u)*6) calc(var(--u)*12) rgba(0,0,0,.5)}
-/* 縦書き2列（右列：キッチンから、／左列：ぜんぶ見える家。） */
+/* 縦書き2列（右列：キッチンから、／左列：ぜんぶ見える。） */
 .fv__tate{position:absolute;z-index:2;margin:0;writing-mode:vertical-rl;white-space:nowrap;height:max-content;width:max-content;
-  font-size:calc(var(--u) * 109 * var(--tk));line-height:1.367;letter-spacing:0;
-  left:calc(50% - var(--u) * 11);transform:translateX(-50%);
-  top:max(calc(var(--u) * 28), calc(var(--st) + var(--u) * 350))}
+  font-size:calc(var(--u) * 107.5 * var(--tk));line-height:1.367;letter-spacing:0;
+  left:calc(50% - var(--u) * 0.5);transform:translateX(-50%);
+  top:max(calc(var(--u) * 28), calc(var(--st) + var(--u) * 317))}
 .fv__tate span{display:block}
-/* 下部：みまもりの家／モデルハウスOPEN／日付の枠 */
+/* 下部：リード一行／みまもりの家（マスタード）／モデルハウスOPEN／日付の枠 */
+.fv__lead{position:absolute;left:0;right:0;top:calc(var(--u) * 2181);margin:0;text-align:center;padding-left:calc(var(--u) * 9);
+  font-size:calc(var(--u) * 66);line-height:1;font-weight:700;letter-spacing:.045em;font-feature-settings:"palt" 1;white-space:nowrap}
+/* タイトル：原画の実測色 #FFDA8A（ほぼ一色）を基準に、ごく控えめなグラデ。文字影は filter:drop-shadow（background-clip:text では text-shadow が使えないため） */
+.fv__name-g{display:inline-block;color:#FFDA8A;
+  background:linear-gradient(180deg,#FFDF95 0%,#FFDA8A 50%,#FDD582 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(calc(var(--u)*4) calc(var(--u)*6) calc(var(--u)*6) rgba(0,0,0,.5))}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){.fv__name-g{-webkit-text-fill-color:currentColor}}
 .fv__bottom{position:absolute;inset:0;z-index:2;pointer-events:none}
-.fv__name{position:absolute;left:0;right:0;top:calc(var(--u) * 2210);margin:0;text-align:center;padding-right:calc(var(--u) * 29);
+.fv__name{text-shadow:none;position:absolute;left:0;right:0;top:calc(var(--u) * 2268);margin:0;text-align:center;padding-right:calc(var(--u) * 6);
   font-size:calc(var(--u) * 150);line-height:1;font-weight:900;letter-spacing:.02em;white-space:nowrap}
-.fv__open{position:absolute;left:0;right:0;top:calc(var(--u) * 183);padding-right:calc(var(--u) * 24);font-size:calc(var(--u) * 104.2);line-height:1;font-weight:900;letter-spacing:.01em}
-.fv__date{position:absolute;left:calc(var(--u) * 179);width:calc(var(--u) * 1076);top:calc(var(--u) * 2555);height:calc(var(--u) * 245);
+.fv__open{position:absolute;left:0;right:0;top:calc(var(--u) * 183);padding-right:0;font-size:calc(var(--u) * 104.2);line-height:1;font-weight:900;letter-spacing:.01em}
+.fv__date{position:absolute;left:calc(var(--u) * 182);width:calc(var(--u) * 1077);top:calc(var(--u) * 2583);height:calc(var(--u) * 245);
   border:max(1px, calc(var(--u) * 2.5)) solid rgba(255,255,255,.85);border-radius:calc(var(--u) * 16);
   background:rgba(255,255,255,.22);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);box-shadow:none;text-align:center}
 .fv__date p{position:absolute;left:0;right:0;margin:0;line-height:1;white-space:nowrap}

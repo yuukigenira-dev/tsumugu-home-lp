@@ -43,6 +43,7 @@
   /* ---------- 3. FVの入場（約1.6秒。背景は透明にせず .4 から＝LCPを遅らせない） ---------- */
   .js:not(.motion-off) .fv__stage > picture:not(.fv__comp){animation:moBg .6s ease-out both}
   .js:not(.motion-off) .fv__tate{animation:moFvIn .8s var(--mo-ease) .35s both}
+  .js:not(.motion-off) .fv__lead{animation:moFvIn .8s var(--mo-ease) .48s both}
   .js:not(.motion-off) .fv__name-t{animation:moFvIn .8s var(--mo-ease) .6s both}
   .js:not(.motion-off) .fv__open{animation:moFvIn .8s var(--mo-ease) .75s both}
   .js:not(.motion-off) .fv__date{animation:moFvIn .7s var(--mo-ease) .9s both}

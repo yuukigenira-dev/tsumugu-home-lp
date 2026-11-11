@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>みまもりの家 モデルハウスOPEN｜住宅見学会・ご予約｜株式会社つむぐホーム</title>
 <!-- 仮コピー -->
-<meta name="description" content="キッチンから、ぜんぶ見える。新潟市中央区美沢台2丁目のモデルハウス「みまもりの家」見学会。見学無料・お子様連れ歓迎。WEB予約でQUOカード500円分プレゼント。">
+<meta name="description" content="キッチンから、ぜんぶ見える。新潟市中央区美沢台2丁目、つむぐホーム モデルハウス「みまもりの家」の見学会。見学無料・お子様連れ歓迎。WEB予約でQUOカード500円分プレゼント。">
 <meta name="theme-color" content="#FAF7F0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@
 </svg>
 
 <div class="fv" id="top">
-  <!-- FV：文字なし背景（images/fv-bg-*）＋HTML文字。デザイン原画（Photoshop）は firstview.jpg（1440×2999）。
+  <!-- FV：文字なし背景（images/fv-bg-*）＋HTML文字。デザイン原画（Photoshop）は firstview_v2.jpg（1440×2999）。
        ▼ 切り替え：文字入り1枚モードにするには、styles.css の「FV表示モード」の2行を入れ替える（既定＝HTML文字版） -->
   <div class="fv__stage">
     <picture>
@@ -85,11 +85,12 @@
       <source type="image/webp" srcset="images/fv-comp-720.webp 720w, images/fv-comp-1440.webp 1440w" sizes="(min-width: 1024px) 48vh, 100vw">
       <img src="images/fv-comp-720.jpg" srcset="images/fv-comp-720.jpg 720w, images/fv-comp-1440.jpg 1440w" sizes="(min-width: 1024px) 48vh, 100vw"
            width="720" height="1500" loading="lazy" decoding="async"
-           alt="白い壁と黒い屋根のモデルハウス「みまもりの家」の前を歩く親子3人。「キッチンから、ぜんぶ見える家。」みまもりの家 モデルハウスOPEN。12月12日(土)・13日(日)・19日(土)・20日(日) 完成見学会開催。">
+           alt="白い壁と黒い屋根のモデルハウス「みまもりの家」の前を歩く親子3人。「キッチンから、ぜんぶ見える。」「子どもの声が、いつも届く日常。」みまもりの家 モデルハウスOPEN。12月12日(土)・13日(日)・19日(土)・20日(日) 完成見学会開催。">
     </picture>
     <!-- 下部の文字（ステージ基準＝画像と同じ位置に載る） -->
     <div class="fv__text fv__bottom">
-      <h1 class="fv__name"><span class="fv__name-t">みまもりの家</span><span class="fv__open">モデルハウスOPEN</span></h1>
+      <p class="fv__lead">子どもの声が、いつも届く日常。</p>
+      <h1 class="fv__name"><span class="fv__name-t"><span class="fv__name-g">みまもりの家</span></span><span class="fv__open">モデルハウスOPEN</span></h1>
       <!-- 仮：日付確定後に差し替え（FV・03の表・フォーム js/main.js の EVENT_DATES を合わせる） -->
       <div class="fv__date">
         <p class="fv__date-d"><span><sup>12/</sup>12<small>(土)</small></span> <span>13<small>(日)</small></span> <span>19<small>(土)</small></span> <span>20<small>(日)</small></span></p>
@@ -98,7 +99,7 @@
     </div>
   </div>
   <!-- 縦書き（コンテナ基準：短い画面では画像が上にずれるため、上端を確保して家族に重ねない） -->
-  <p class="fv__text fv__tate"><span>キッチンから、</span><span>ぜんぶ見える家。</span></p>
+  <p class="fv__text fv__tate"><span>キッチンから、</span><span>ぜんぶ見える。</span></p>
 </div>
 
 <main id="main" class="main">
@@ -119,7 +120,7 @@
     <table class="info-table">
       <caption class="visually-hidden">モデルハウス見学会の開催情報</caption>
       <tbody>
-        <tr><th scope="row">所在地</th><td>新潟市中央区美沢台2丁目（K様邸）</td></tr>
+        <tr><th scope="row">会場</th><td>つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目<span class="tentative">仮</span><small class="access__tbd">※番地は確定後に記載</small></td></tr>
         <!-- ▼▼ 開催日（仮）：確定後に差し替えてください。FVの帯・丸バッジ、フォームの日付（js/main.js の EVENT_DATES）も合わせて変更 ▼▼ -->
         <tr><th scope="row">開催日</th><td>2026年12月12日(土)・13日(日)<br>19日(土)・20日(日)<span class="tentative">仮</span></td></tr>
         <!-- ▲▲ 開催日（仮）ここまで ▲▲ -->
@@ -170,8 +171,7 @@
              width="480" height="634" loading="lazy" decoding="async" alt="ウッドデッキと芝生の庭から見たみまもりの家の水彩イラスト。">
       </picture>
       <figcaption>
-        <span class="worldview__quote">「キッチンからデッキの子どもにも声が届くのが、この家の決め手でした」</span>
-        <span class="worldview__who">（30代ご夫婦＋お子様1人）</span>
+        <span class="worldview__quote">「キッチンからデッキの子どもにも、声が届く。」</span>
         <small>※外観パースはイメージです</small>
       </figcaption>
     </figure>
@@ -424,7 +424,7 @@
       <div class="perk__badge"><small>ご予約来場特典</small><b>QUOカード</b><strong>500円分</strong><em>プレゼント！</em></div>
       <p class="perk__text">WEBまたはお電話でご予約ください<small>（前日まで受付）</small></p>
     </div>
-    <p class="note note--light">※お施主様のご厚意による公開のため、室内の撮影はご遠慮ください。<br>※混雑時はお待ちいただく場合があります。</p>
+    <p class="note note--light">※ご来場の皆さまへの配慮のため、室内の撮影はご遠慮ください。<br>※混雑時はお待ちいただく場合があります。</p>
     <div class="also">
       <p class="also__label">同時開催</p>
       <p><strong>スマートホーム説明会</strong><br>スマートフォン等から遠隔操作や自動化によって、暮らしの利便性や快適性を高める仕組みをご紹介。</p>
@@ -443,7 +443,7 @@
       <details><summary>子ども連れでも大丈夫ですか？</summary><p>お子様連れ歓迎です。見学は無料です。</p></details>
       <details><summary>見学にはどのくらい時間がかかりますか？</summary><p>ご見学は30分ほどから、現地スタッフがご案内します。</p></details>
       <details><summary>駐車場はありますか？</summary><p>駐車場は2台分です（バリアフリー優先駐車場あり）。満車の際は係員の誘導に従ってください。</p></details>
-      <details><summary>室内の写真を撮ってもいいですか？</summary><p>お施主様のご厚意による公開のため、室内の撮影はご遠慮ください。仕様書・図面集は会場でお配りしています。</p></details>
+      <details><summary>室内の写真を撮ってもいいですか？</summary><p>ご来場の皆さまへの配慮のため、室内の撮影はご遠慮ください。仕様書・図面集は会場でお配りしています。</p></details>
       <details><summary>QUOカードはどうすればもらえますか？</summary><p>ご予約のうえご来場いただいた方に、QUOカード500円分をプレゼントします。</p></details>
     </div>
   </div>
@@ -452,7 +452,7 @@
   <div class="inner">
     <p class="eyebrow">ACCESS</p>
     <h2 class="h-serif" id="access-title">交通のご案内</h2>
-    <p class="access__place">会場：新潟市中央区美沢台2丁目 K様邸</p>
+    <p class="access__place">会場：つむぐホーム モデルハウス「みまもりの家」<br>新潟市中央区美沢台2丁目<small class="access__tbd">※番地は確定後に記載</small></p>
     <!-- 地図プレースホルダー：本番では Google マップ等の埋め込み、または地図画像に差し替えてください -->
     <div class="map-placeholder" role="img" aria-label="地図（準備中）。美沢台駅から駅前通りを南へ、国道8号を越えて中央公園の南側が会場です。">
       <span>MAP（準備中）</span>
