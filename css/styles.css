@@ -686,30 +686,37 @@ body:has(.sticky-bar.is-hidden) .to-top{bottom:calc(16px + env(safe-area-inset-b
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
 
 /* =========================================================
-   v12 POINT 見出しの装飾：水彩の外観イラスト
+   v12→v13 POINT 見出しの装飾：水彩の外観イラスト（引きのアングル：屋根〜ウッドデッキ・家族まで見せる）
    ・見出しブロック（eyebrow／h2／リード）の背面、右端（セクション右端まで）に配置
-   ・左へ向かって消えるグラデーション＋下端もカードへ向けて消す（mask 2枚を交差）
-   ・文字の下は透明〜ごく薄い：左55%は完全に透明、不透明度は 0.6
+   ・箱は横1.1:縦1。画像（480×634）の縦 20%〜89% を表示（object-position 50% 64%）
+   ・左へ向かって消えるグラデーション（文字の下は透明〜ごく薄い）＋下端は短く軽いフェードでデッキを残す
+   ・見出しブロックは絵が収まる高さまで min-height で伸ばす（カードには重ねない）
    ========================================================= */
-.charms__head{position:relative;isolation:isolate}
+.charms__head{position:relative;isolation:isolate;
+  --art-w:min(84%,400px);
+  /* 絵の高さ（幅÷1.1）− セクション上余白 ぶんを確保。幅 = 見出し幅(100vw−左右余白、最大640px)×84%（最大400px） */
+  min-height:calc(min(min(100vw - var(--gutter) * 2, 640px) * .84, 400px) / 1.1 - clamp(56px,13vw,96px) - 4px)}
 .charms__head > :not(.charms__art){position:relative;z-index:1}
+.charms__head{margin-bottom:28px}
+.charms__head .section-lead{margin-bottom:0}
 .charms__art{position:absolute;z-index:0;pointer-events:none;
   top:calc(clamp(56px,13vw,96px) * -1);              /* セクション上端から */
   right:calc(var(--gutter) * -1);                     /* セクション右端まで（.inner の余白分はみ出す） */
-  bottom:-8px;width:min(74%,420px)}
+  width:var(--art-w);aspect-ratio:1.1}
 .charms__art picture,.charms__art img{display:block;width:100%;height:100%}
-.charms__art img{object-fit:cover;object-position:62% 46%;opacity:.6;
-  -webkit-mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 30%,transparent 78%),linear-gradient(to bottom,transparent 0%,#000 22%,#000 62%,transparent 100%);
+.charms__art img{object-fit:cover;object-position:50% 64%;opacity:.55;
+  -webkit-mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 35%,transparent 82%),linear-gradient(to bottom,transparent 0%,#000 16%,#000 84%,transparent 100%);
   -webkit-mask-composite:source-in;
-  mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 30%,transparent 78%),linear-gradient(to bottom,transparent 0%,#000 22%,#000 62%,transparent 100%);
+  mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 35%,transparent 82%),linear-gradient(to bottom,transparent 0%,#000 16%,#000 84%,transparent 100%);
   mask-composite:intersect}
 .charms__art-note{position:absolute;right:8px;bottom:4px;font-size:10px;line-height:1;color:var(--ink-2);opacity:.8;letter-spacing:.02em}
 @media (max-width:1023px){
-  /* スマホ：見出し・リードの文字が絵に重なりやすいので、さらに薄く・右寄りに消す */
-  .charms__art img{opacity:.5;object-position:62% 40%;
-    -webkit-mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.8) 25%,transparent 70%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 45%,transparent 84%);
-    mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.8) 25%,transparent 70%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 45%,transparent 84%)}
+  /* スマホ：見出し・リードの文字が絵に重なりやすいので、少し薄く */
+  .charms__art img{opacity:.38}
+  /* リード文の右端が家族のシルエットに重なるため、白いにじみ（白地では見えない）で可読性を確保 */
+  .charms__head .section-lead{text-shadow:0 0 6px #fff,0 0 12px #fff,0 0 18px rgba(255,255,255,.9)}
 }
 @media (min-width:1024px){
-  .charms__art{right:-40px;width:420px;max-height:340px}
+  .charms__head{min-height:calc(400px / 1.1 - 96px - 4px)}
+  .charms__art{right:-40px}
 }
