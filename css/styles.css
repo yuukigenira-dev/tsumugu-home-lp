@@ -526,6 +526,7 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 }
 .benefit .perk{margin:4px 0 8px}
 .reserve .perk{margin:0 0 20px}
+@media (max-width:767px){ .perk__text{display:none} .perk__sub{margin-top:4px!important} }
 
 /* ---------- 07 キーワード ---------- */
 .kw{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 34px}
