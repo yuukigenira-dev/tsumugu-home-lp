@@ -94,12 +94,6 @@ p + p{margin-top:1em}
 .charm__no{font-family:var(--serif);font-size:30px;color:var(--mustard-dark);line-height:1;display:block;margin-bottom:8px}
 .charm__title{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.5;margin-bottom:8px}
 .charm__meta{font-size:13px;color:var(--olive-dark);font-weight:500;margin-top:10px}
-.worldview{display:grid;grid-template-columns:38% 1fr;gap:18px;align-items:center;margin-top:36px}
-.worldview img{border-radius:10px;width:100%}
-.worldview figcaption{font-family:var(--serif);font-size:15px;line-height:1.8}
-.worldview__quote{display:block}
-.worldview__who{display:block;font-size:13px;color:var(--ink-2);margin-top:4px}
-.worldview small{display:block;font-family:var(--sans);font-size:11px;color:var(--ink-2);margin-top:8px}
 
 /* =========================================================
    04 ギャラリー 2F
@@ -387,7 +381,6 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 .icon--lg{width:44px;height:44px}
 .charm__title{margin-bottom:6px}
 .charm p{margin-top:0}
-.worldview{margin-top:32px}
 
 /* ---------- 05 写真で見る見どころ ---------- */
 .photos{background:var(--cream);padding-top:clamp(56px,13vw,96px);padding-bottom:clamp(56px,12vw,88px)}
@@ -691,3 +684,32 @@ body:has(.sticky-bar.is-hidden) .to-top{bottom:calc(16px + env(safe-area-inset-b
   body:has(.fab.is-hidden) .to-top{bottom:28px}
 }
 @media (prefers-reduced-motion:reduce){.to-top{transition:none}}
+
+/* =========================================================
+   v12 POINT 見出しの装飾：水彩の外観イラスト
+   ・見出しブロック（eyebrow／h2／リード）の背面、右端（セクション右端まで）に配置
+   ・左へ向かって消えるグラデーション＋下端もカードへ向けて消す（mask 2枚を交差）
+   ・文字の下は透明〜ごく薄い：左55%は完全に透明、不透明度は 0.6
+   ========================================================= */
+.charms__head{position:relative;isolation:isolate}
+.charms__head > :not(.charms__art){position:relative;z-index:1}
+.charms__art{position:absolute;z-index:0;pointer-events:none;
+  top:calc(clamp(56px,13vw,96px) * -1);              /* セクション上端から */
+  right:calc(var(--gutter) * -1);                     /* セクション右端まで（.inner の余白分はみ出す） */
+  bottom:-8px;width:min(74%,420px)}
+.charms__art picture,.charms__art img{display:block;width:100%;height:100%}
+.charms__art img{object-fit:cover;object-position:62% 46%;opacity:.6;
+  -webkit-mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 30%,transparent 78%),linear-gradient(to bottom,transparent 0%,#000 22%,#000 62%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.85) 30%,transparent 78%),linear-gradient(to bottom,transparent 0%,#000 22%,#000 62%,transparent 100%);
+  mask-composite:intersect}
+.charms__art-note{position:absolute;right:8px;bottom:4px;font-size:10px;line-height:1;color:var(--ink-2);opacity:.8;letter-spacing:.02em}
+@media (max-width:1023px){
+  /* スマホ：見出し・リードの文字が絵に重なりやすいので、さらに薄く・右寄りに消す */
+  .charms__art img{opacity:.5;object-position:62% 40%;
+    -webkit-mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.8) 25%,transparent 70%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 45%,transparent 84%);
+    mask-image:linear-gradient(to left,#000 0%,rgba(0,0,0,.8) 25%,transparent 70%),linear-gradient(to bottom,transparent 0%,#000 20%,#000 45%,transparent 84%)}
+}
+@media (min-width:1024px){
+  .charms__art{right:-40px;width:420px;max-height:340px}
+}

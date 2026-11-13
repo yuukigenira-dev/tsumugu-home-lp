@@ -144,10 +144,21 @@
 <!-- ============ 04 この家で体感できる3つの魅力 ============ -->
 <section class="charms" id="charms" aria-labelledby="charms-title">
   <div class="inner">
-    <p class="eyebrow">POINT</p>
-    <h2 class="h-serif" id="charms-title">この家で体感できる<br>3つの魅力</h2>
-    <!-- 仮コピー（見出し・リード文） -->
-    <p class="section-lead">図面だけでは伝わらない3つを、現地でご案内します。</p>
+    <div class="charms__head">
+      <!-- 装飾：水彩の外観イラスト（見出し右端から左へグラデーションで消える。読み上げ対象外） -->
+      <div class="charms__art" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="images/watercolor-480.webp 480w, images/watercolor-960.webp 960w" sizes="(min-width: 1024px) 400px, 72vw">
+          <img src="images/watercolor-480.jpg" srcset="images/watercolor-480.jpg 480w, images/watercolor-960.jpg 960w" sizes="(min-width: 1024px) 400px, 72vw"
+               width="480" height="634" loading="lazy" decoding="async" alt="">
+        </picture>
+        <small class="charms__art-note">※外観パースはイメージ</small>
+      </div>
+      <p class="eyebrow">POINT</p>
+      <h2 class="h-serif" id="charms-title">この家で体感できる<br>3つの魅力</h2>
+      <!-- 仮コピー（見出し・リード文） -->
+      <p class="section-lead">図面だけでは伝わらない3つを、現地でご案内します。</p>
+    </div>
     <ol class="charm-list">
       <li class="charm">
         <span class="charm__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-washitsu"/></svg></span>
@@ -168,17 +179,6 @@
         <p class="charm__meta">場所：2F南側　現在：ふたりのワークルーム／将来：2つの個室に</p>
       </li>
     </ol>
-    <figure class="worldview">
-      <picture>
-        <source type="image/webp" srcset="images/watercolor-480.webp 480w, images/watercolor-960.webp 960w" sizes="(min-width: 1024px) 240px, 40vw">
-        <img src="images/watercolor-480.jpg" srcset="images/watercolor-480.jpg 480w, images/watercolor-960.jpg 960w" sizes="(min-width: 1024px) 240px, 40vw"
-             width="480" height="634" loading="lazy" decoding="async" alt="ウッドデッキと芝生の庭から見たみまもりの家の水彩イラスト。">
-      </picture>
-      <figcaption>
-        <span class="worldview__quote">「キッチンからデッキの子どもにも、声が届く。」</span>
-        <small>※外観パースはイメージです</small>
-      </figcaption>
-    </figure>
   </div>
 </section>
 

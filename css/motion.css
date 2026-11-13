@@ -22,6 +22,7 @@
     transition:opacity var(--mo-dur) var(--mo-ease),filter var(--mo-dur) var(--mo-ease),transform var(--mo-dur) var(--mo-ease);
     will-change:opacity,filter,transform}
   .js:not(.motion-off) [data-reveal="fade"]{filter:none}                 /* 大きい面（表・フォーム）はぼかさず軽く */
+  .js:not(.motion-off) [data-reveal="soft"]{filter:none;transform:none;transition:opacity 1.4s var(--mo-ease)}  /* 装飾の水彩：位置は動かさず透明度だけ */
   .js:not(.motion-off) [data-reveal].is-in{opacity:1;filter:blur(0);transform:none;transition-delay:var(--mo-d,0ms)}
   .js:not(.motion-off) [data-reveal].is-done{filter:none;will-change:auto;transition:none}
 

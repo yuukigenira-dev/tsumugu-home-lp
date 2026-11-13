@@ -19,10 +19,11 @@
     '.eyebrow', '.h-serif', '.section-lead', '.info__feature', '.sub-title',
     '.charm', '.kw li', '.merit-list li', '.benefit-list li', '.faq-list details', '.spec-card', '.spec-list', '.snow',
     '.shot__body', '.perk', '.note', '.cta-row', '.also', '.access__place', '.route', '.access-map__frame', '.access-map__btn',
-    '.worldview figcaption', '.tel-line', '.footer__logo', '.footer address', '.footer__policy',
+    '.tel-line', '.footer__logo', '.footer address', '.footer__policy',
   ];
+  const REVEAL_SOFT = ['.charms__art'];
   const REVEAL_FADE = ['.info-band', '.info-table', '.form', '.viewer__bar'];
-  const WIPE = ['.shot .photo', '.worldview figure', '.movie__frame'];
+  const WIPE = ['.shot .photo', '.movie__frame'];
 
   const styleGetter = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'style').get;
   const styleOf = (el) => styleGetter.call(el);
@@ -39,6 +40,7 @@
   });
   REVEAL.forEach((s) => mark(s, 'data-reveal', ''));
   REVEAL_FADE.forEach((s) => mark(s, 'data-reveal', 'fade'));
+  REVEAL_SOFT.forEach((s) => mark(s, 'data-reveal', 'soft'));
   WIPE.forEach((s) => mark(s, 'data-wipe', ''));
 
   const targets = Array.from(document.querySelectorAll('[data-reveal],[data-wipe]'));
