@@ -613,6 +613,32 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
   background:linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),#dfe6e8 url("../images/fv-bg-720.webp") center 62% / cover no-repeat;filter:blur(32px) saturate(.85)}
 .fv__stage{z-index:1}
 
+/* =========================================================
+   v10 タブレット用FV（600〜1023px）：写真 fv-tab-*（1600×2773、文字なし）＋HTML文字
+   ・--p は「タブレット写真の1px」。文字はスマホと同じ指定（--u＝ステージ幅÷1440）を、場所に合わせて縮めて使う
+     縦書き＝スマホの82%（左上の空に収める）／下の文字＝スマホの80%（家族の足元〜写真下端の芝生に収める）
+   ・上は空を最大160pxまで切ってよい（縦書きの上端200px・屋根の頂点390pxは切らない）。下端（2773px）は切らない
+   ・一画面に収まらないときは一体で縮小、小さくなりすぎる場合（350px／FV幅45%未満）は縦に伸ばしてスクロール（v9と同じ考え方）
+   ・600pxからにしたのは、600〜767pxでもスマホ用の縦長原画だと左右の余白が大きくなるため（スマホ縦向き 〜430px は従来どおり）
+   ========================================================= */
+@media (min-width:600px) and (max-width:1023px){
+  .fv{--cw:calc(100cqh * 1600 / 2613);
+    --w:max(min(100cqw, calc(var(--cw) + clamp(0px, (var(--cw) - 100cqw * .985) * 1000, 100cqw))), calc(100cqh * 1600 / 2773));
+    --st:min(0px, calc(100cqh - var(--w) * 2773 / 1600));
+    --p:calc(var(--w) / 1600);
+    --wmin:min(var(--fw), max(350px, var(--fw) * .45));      /* 下の文字が80%なので、日付が約14pxを下回らない幅 */
+    height:max(var(--avh), calc(var(--wmin) * 2613 / 1600))}
+  .fv__stage{height:calc(var(--w) * 2773 / 1600)}
+  .fv::before{background-image:linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),url("../images/fv-tab-800.webp");background-position:center 55%}
+  /* 縦書き：左上の空（上の屋根の左、下の屋根の軒より上）。写真座標で左42px・上200px（下端は約885px、軒は約920px） */
+  .fv__tate{--tk:.82;left:calc(50% - var(--w) / 2 + var(--p) * 42);transform:none;top:calc(var(--st) + var(--p) * 200)}
+  /* 下の文字：家族の足元（影・にじみ込みで約2160px）より下の芝生。行どうしの間隔はスマホ原画と同じ比率 */
+  .fv__bottom{--u:calc(var(--w) / 1440 * .8)}
+  .fv__lead{top:calc(var(--p) * 2178)}
+  .fv__name{top:calc(var(--p) * 2178 + var(--u) * 87)}
+  .fv__date{top:calc(var(--p) * 2178 + var(--u) * 402);left:calc(50% - var(--u) * 538.5)}
+}
+
 @media (min-width:1024px){ .fv{min-height:0} }
 
 /* ---------- 03：FVから移した小さなキャッチ／ヘッダー（スマホは幅に収める） ---------- */

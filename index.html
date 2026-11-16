@@ -16,7 +16,7 @@
 <link rel="preload" as="image" type="image/webp"
       imagesrcset="images/fv-bg-720.webp 720w, images/fv-bg-1440.webp 1440w"
       imagesizes="(min-width: 1024px) 48vh, 100vw" fetchpriority="high">
-<link rel="stylesheet" href="css/styles.css?v=2">
+<link rel="stylesheet" href="css/styles.css?v=3">
 <link rel="stylesheet" href="css/motion.css">
 <!-- モーション用：JSが動く環境でだけ .js を付ける（JS無効なら全て表示）。5秒たってもモーションJSが起動しなければ全表示に戻す -->
 <script>document.documentElement.classList.add("js");setTimeout(function(){var c=document.documentElement.classList;if(!c.contains("motion-ready"))c.add("motion-off")},5000)</script>
@@ -79,6 +79,9 @@
        ▼ 切り替え：文字入り1枚モードにするには、styles.css の「FV表示モード」の2行を入れ替える（既定＝HTML文字版） -->
   <div class="fv__stage">
     <picture>
+      <!-- タブレット（600〜1023px）：タブレット用の写真（文字なし・1600×2773）。文字の位置は styles.css「v10 タブレット用FV」 -->
+      <source media="(min-width: 600px) and (max-width: 1023px)" type="image/webp" srcset="images/fv-tab-800.webp 800w, images/fv-tab-1600.webp 1600w" sizes="min(100vw, 720px)">
+      <source media="(min-width: 600px) and (max-width: 1023px)" srcset="images/fv-tab-800.jpg 800w, images/fv-tab-1600.jpg 1600w" sizes="min(100vw, 720px)">
       <source type="image/webp" srcset="images/fv-bg-720.webp 720w, images/fv-bg-1440.webp 1440w" sizes="(min-width: 1024px) 48vh, 100vw">
       <img class="fv__img" src="images/fv-bg-720.jpg" srcset="images/fv-bg-720.jpg 720w, images/fv-bg-1440.jpg 1440w" sizes="(min-width: 1024px) 48vh, 100vw"
            width="720" height="1500" fetchpriority="high" decoding="async" alt="">
