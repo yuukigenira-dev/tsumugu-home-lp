@@ -594,9 +594,24 @@ html{scroll-padding-top:calc(var(--hdr) + 8px)}
 .fv__date-d sup{font-size:.6em;vertical-align:top;line-height:1;position:relative;top:.05em}
 .fv__date-t{top:calc(var(--u) * 123);font-size:calc(var(--u) * 73);font-weight:900;letter-spacing:.02em}
 
-/* 縦が足りない画面（FVの縦横比）では縦書きを少し小さくして、家族に重ねない */
-@container fv (min-aspect-ratio: 0.56){ .fv__tate{--tk:.86} }
-@container fv (min-aspect-ratio: 0.64){ .fv__tate{--tk:.74} }
+/* v9 縦が足りない画面（タブレット・横長で低い画面）の対策
+   ・原画の上端の切り取りは最大140u（天井の一部）まで。下は日付枠の下（2844u）まで必ず見せる → 必要な高さ＝2704u
+   ・高さが足りないときは画像と文字を一体で縮小して一画面に収める（左右の余白は同じ写真のぼかしで埋める）
+   ・縮小すると文字が小さくなりすぎる場合（ステージ幅が 288px／FV幅の45% 未満）は、FVを縦に伸ばしてスクロールさせる
+   ・上を大きく切らなくなったため、縦書きの縮小（--tk）は不要 → 常に原画どおりの大きさ */
+.fv{--cw:calc(100cqh * 1440 / 2704);                                                        /* 一画面に収まるステージ幅 */
+  --w:max(min(100cqw, calc(var(--cw) + clamp(0px, (var(--cw) - 100cqw * .985) * 1000, 100cqw))), calc(100cqh * 1440 / 2999));  /* 横幅との差が1.5%未満なら幅いっぱい（天井を少し多めに切る） */
+  --st:min(0px, calc(100cqh - var(--w) * 1.975))}
+@media (max-width:1023px){
+  .fv{--fw:min(100vw, var(--col));                                                        /* FVの幅 */
+    --avh:calc(100svh - var(--hdr) - var(--bar-h) - env(safe-area-inset-bottom));        /* ヘッダーと予約バーの間の高さ */
+    --wmin:min(var(--fw), max(288px, var(--fw) * .45));                                    /* 文字が小さくなりすぎない最小のステージ幅 */
+    height:max(var(--avh), calc(var(--wmin) * 2704 / 1440));
+    min-height:360px}
+}
+.fv::before{content:"";position:absolute;inset:-40px;z-index:0;pointer-events:none;
+  background:linear-gradient(rgba(255,255,255,.22),rgba(255,255,255,.22)),#dfe6e8 url("../images/fv-bg-720.webp") center 62% / cover no-repeat;filter:blur(32px) saturate(.85)}
+.fv__stage{z-index:1}
 
 @media (min-width:1024px){ .fv{min-height:0} }
 
